@@ -10,6 +10,15 @@
 
 ---
 
+## Extensions PhpStorm (optional)
+
+- Symfony Support
+- .env file support
+- PHP Annotations
+- Atom Material Icons
+
+---
+
 
 ## Initialisation du projet
 
