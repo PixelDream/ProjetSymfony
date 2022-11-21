@@ -26,16 +26,7 @@ jobs:
           node-version: 18
 
       # Use composer with cache and install dependencies
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - uses: ramsey/composer-install@v2
 
       # Build assets with webpack & symfony encore
       - name: Build assets ⚙
