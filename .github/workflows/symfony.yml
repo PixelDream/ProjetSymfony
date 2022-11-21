@@ -27,11 +27,11 @@ jobs:
 
       # Build assets with webpack & symfony encore
       - name: Build assets ⚙
-        run: npm build
+        run: npm run build
 
       # Perform tests before upload project in prod
       - name: Check Tests ✅
-        run: npm test
+        run: npm run test
 
       # Copy .env file
       - name: Copy .env.test.local
