@@ -1,14 +1,10 @@
 # SAFER
 
----
-
 ## Prérequis
 
 - Nodejs >= 8.19.3
 - composer >= 2.4.3
 - Symfony cli
-
----
 
 ## Extensions PhpStorm (optional)
 
@@ -16,9 +12,6 @@
 - .env file support
 - PHP Annotations
 - Atom Material Icons
-
----
-
 
 ## Initialisation du projet
 
