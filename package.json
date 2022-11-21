@@ -24,6 +24,7 @@
     "url": "morgan-nehdi.com"
   },
   "scripts": {
+    "test": "",
     "open": "symfony open:local",
     "caInstall": "symfony server:ca:install",
     "start": "symfony server:start",
