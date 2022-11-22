@@ -29,3 +29,5 @@ yarn-error.log
 composer.lock
 symfony.lock
 package-lock.json
+
+/.idea/*
