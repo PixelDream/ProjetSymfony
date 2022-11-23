@@ -3,8 +3,9 @@
 ## Prérequis
 
 - Nodejs >= 8.19.3
-- composer >= 2.4.3
+- Composer >= 2.4.3
 - Symfony cli
+- Docker / Docker Compose
 
 ## Extensions PhpStorm (optional)
 
@@ -37,6 +38,22 @@ Installation du certificat ssl
 symfony server:ca:install
 ```
 
+## Utilisation de docker
+
+Créer un environement de développement avec **docker**
+
+Lancer un container docker
+```bash
+# A la racine du projet
+docker-compose up --build
+```
+
+Arrêter un container docker
+```bash
+# A la racine du projet
+docker-compose down
+```
+
 ## Lancer le projet
 
 Pour pouvoir lancer l'application il est nécéssaire de lancer plusieurs scripts
@@ -61,6 +78,8 @@ Lancer le worker qui traite les mails
 ```bash
 npm run worker
 ```
+
+Lien vers [MailCatcher](http://localhost:1080/)
 
 
 
