@@ -1,0 +1,18 @@
+{% for label, messages in app.flashes %}
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-container">
+        {% for message in messages %}
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" {{ stimulus_controller('toast') }}>
+                    <div class="toast-header text-white bg-{{ label }}">
+                        <strong class="me-auto">Notification</strong>
+                        <small>{{ when|default('Maintenant') }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
