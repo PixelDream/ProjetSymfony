@@ -38,6 +38,12 @@ Installation du certificat ssl
 symfony server:ca:install
 ```
 
+## Mise en place du jeu de données
+
+```bash
+php bin/console doctrine:fixtures:load
+```
+
 ## Utilisation de docker
 
 Créer un environement de développement avec **docker**
