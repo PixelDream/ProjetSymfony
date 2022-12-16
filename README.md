@@ -87,6 +87,20 @@ npm run worker
 
 Lien vers [MailCatcher](http://localhost:1080/)
 
+## Connexion à l'application
+
+### Utilisateur
+
+Il y a 4 utilisateurs de test dans via les fixtures :
+
+- user1@safer.com
+- password
+
+### Administrateur
+
+- admin@safer.com
+- password
+
 
 
 

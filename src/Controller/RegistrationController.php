@@ -51,16 +51,18 @@ class RegistrationController extends AbstractController
                     ->from(new Address('no_reply@safe.fr', 'safer'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('security/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app');
         }
 
-        return $this->render('registration/register.html.twig', [
+        $response = new Response(null, $form->isSubmitted() ? 422 : 200);
+
+        return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
-        ]);
+        ], $response);
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]

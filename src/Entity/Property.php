@@ -39,7 +39,7 @@ class Property
     #[ORM\Column]
     private ?float $surface = null;
 
-    #[ORM\ManyToOne(inversedBy: 'properties')]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'properties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?category $category = null;
 

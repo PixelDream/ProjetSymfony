@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\ManyToMany(targetEntity: property::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'favoritesUsers')]
     private Collection $favorites;
 
     public function __construct()
