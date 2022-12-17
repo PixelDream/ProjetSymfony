@@ -6,7 +6,6 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class UserFixtures extends Fixture
 {
@@ -27,7 +26,6 @@ class UserFixtures extends Fixture
             $user->setLastName('Doe');
             $user->setIsVerified($i != 3);
             $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
-            $user->setRoles(['ROLE_USER']);
             $manager->persist($user);
         }
 

@@ -1,0 +1,45 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    Dashboard
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="container">
+        <div class="row">
+            <a class="col-md-3" href="{{ ea_url().setController('App\\Controller\\Admin\\UserCrudController') }}">
+                <div class="card-counter info">
+                    <i class="fa fa-users"></i>
+                    <span class="count-numbers">{{ user_count }}</span>
+                    <span class="count-name">Utilisateurs</span>
+                </div>
+            </a>
+
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <i class="fa fa-code-fork"></i>
+                    <span class="count-numbers">0</span>
+                    <span class="count-name">X</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter danger">
+                    <i class="fa fa-ticket"></i>
+                    <span class="count-numbers">0</span>
+                    <span class="count-name">X</span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter success">
+                    <i class="fa fa-database"></i>
+                    <span class="count-numbers">0</span>
+                    <span class="count-name">X</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
