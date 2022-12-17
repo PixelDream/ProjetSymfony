@@ -58,10 +58,15 @@
 
                         </ul>
                         <ul class="navbar-nav ml-auto mt-10">
-                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            {% if is_granted('IS_AUTHENTICATED') %}
                                 <li class="nav-item">
                                     <a class="nav-link login-button" href="{{ path('app_logout') }}">Déconnexion</a>
                                 </li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link add-button" href="{{ path('admin_dashboard') }}">Admin</a>
+                                    </li>
+                                {% endif %}
                             {% else %}
                                 <li class="nav-item">
                                     <a class="nav-link login-button" href="{{ path('app_login') }}">Connexion</a>

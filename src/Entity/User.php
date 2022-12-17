@@ -177,4 +177,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * Return user roles for ChoiceField
+     * @return array<string, string>
+     */
+    public function getRolesChoices(): array
+    {
+        return [
+            'Utilisateur' => 'ROLE_USER',
+            'Administrateur' => 'ROLE_ADMIN',
+        ];
+    }
 }
