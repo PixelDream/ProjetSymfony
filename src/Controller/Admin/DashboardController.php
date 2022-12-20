@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Admin\PropertyCrudController;
+
 
 class DashboardController extends AbstractDashboardController
 {
@@ -49,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Biens', 'fa fa-list', PropertyCrudController::getEntityFqcn());
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', UserCrudController::getEntityFqcn());
+        yield MenuItem::linkToCrud('Categories', 'fas fa-user', CategoryCrudController::getEntityFqcn());
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
