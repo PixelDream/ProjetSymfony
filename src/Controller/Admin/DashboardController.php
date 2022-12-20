@@ -30,6 +30,7 @@ class DashboardController extends AbstractDashboardController
     {
         return $this->render('admin/dashboard.html.twig', [
             'user_count' => $this->stats->getUsersCount(),
+            'property_count' => $this->stats->getPropertiesCount(),
         ]);
     }
 
@@ -42,8 +43,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('ProjetSymfony')
-            ->renderContentMaximized(true);
+            ->setTitle('ProjetSymfony');
     }
 
     public function configureMenuItems(): iterable
@@ -51,7 +51,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Biens', 'fa fa-list', PropertyCrudController::getEntityFqcn());
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', UserCrudController::getEntityFqcn());
-        yield MenuItem::linkToCrud('Categories', 'fas fa-user', CategoryCrudController::getEntityFqcn());
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-tags', CategoryCrudController::getEntityFqcn());
     }
 }

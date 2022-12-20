@@ -345,15 +345,40 @@ class AppFixtures extends Fixture
             ]
         ];
 
+        $categories = [];
+
+        foreach ($dataSet as $data) {
+            $category = $data['Categorie'];
+            if (!in_array($category, $categories)) {
+                $categories[] = $category;
+
+                $categorie = new Category();
+                $categorie->setName($data['Categorie']);
+                $manager->persist($categorie);
+            }
+        }
+
+        $manager->flush();
+
         // Pour chaque catégorie dans dataSet, on crée un object de type Catégorie
         foreach ($dataSet as $data) {
-            $categorie = new Category();
-            $categorie->setName($data['Categorie']);
-            $manager->persist($categorie);
+
+            $category = $manager->getRepository(Category::class)->findOneBy(['name' => $data['Categorie']]);
+
 
             $image = new Image();
-            $image->setPath($data['Reference'] . '.jpg');
+
+            // Vérifier que le fichier existe dans le dossier public/image/property
+            if (file_exists('public/image/property/' . $data['Reference'] . '.jpg')) {
+                $image->setImageName($data['Reference'] . '.jpg');
+            } else {
+                $image->setImageName('default.jpg');
+            }
+
             $manager->persist($image);
+
+
+
 
             $property = new Property();
             $property->setReference($data['Reference']);
@@ -365,7 +390,7 @@ class AppFixtures extends Fixture
             $property->setSurface($data['Surface']);
             $property->setPrice($data['Prix'] == "Nous consulter" ? null : $data['Prix']);
             $property->setType($data['Type']);
-            $property->setCategory($categorie);
+            $property->setCategory($category);
             $property->addImage($image);
             $manager->persist($property);
         }

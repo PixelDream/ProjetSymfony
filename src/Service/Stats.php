@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Property;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -22,6 +23,15 @@ class Stats
     public function getUsersCount(): int
     {
         return $this->entityManager->getRepository(User::class)->count([]);
+    }
+
+    /**
+     * Count of properties
+     * @return int
+     */
+    public function getPropertiesCount(): int
+    {
+        return $this->entityManager->getRepository(Property::class)->count([]);
     }
 
 }

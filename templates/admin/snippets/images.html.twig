@@ -1,0 +1,5 @@
+<div class="form-widget">
+    {% for image in field.value %}
+            <img height="110px" width="auto" src="{{ vich_uploader_asset(image, field.formTypeOptions.propertyFile) }}">
+    {% endfor %}
+</div>

@@ -49,8 +49,13 @@ class Property
     #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 2, nullable: true)]
     private ?string $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Image::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $images;
+
+    /**
+     * @var array|null
+     */
+    private ?array $imageFile = null;
 
     public function __construct()
     {
@@ -226,5 +231,15 @@ class Property
         }
 
         return $this;
+    }
+
+    public function getImageFile(): ?array
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 }

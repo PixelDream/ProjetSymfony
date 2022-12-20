@@ -37,8 +37,8 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Categorie')
-            ->setEntityLabelInPlural('Categories')
+            ->setEntityLabelInSingular('Utilisateur')
+            ->setEntityLabelInPlural('Utilisateurs')
             ->setSearchFields(['email', 'firstName', 'lastName']);
 
     }
@@ -46,12 +46,12 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
-        yield TextField::new('firstName')->setColumns(6);
-        yield TextField::new('lastName')->setColumns(6);
-        yield TextField::new('email')->setColumns(6);
-        yield TextField::new('password')->setColumns(6)->setFormType(PasswordType::class)->hideOnIndex()->setEmptyData("")->setValue("")->setRequired(false);
-        yield ChoiceField::new('roles')->allowMultipleChoices()->setChoices(static fn (?User $user): array => $user->getRolesChoices())->setColumns(6);
-        yield BooleanField::new('isVerified')->setColumns(6)->hideOnIndex();
+        yield TextField::new('firstName', label: 'Prénom')->setColumns(6);
+        yield TextField::new('lastName', label: 'Nom')->setColumns(6);
+        yield TextField::new('email', label: 'Email')->setColumns(6);
+        yield TextField::new('password', label: 'Mot de passe')->setColumns(6)->setFormType(PasswordType::class)->hideOnIndex()->setEmptyData("")->setValue("")->setRequired(false);
+        yield ChoiceField::new('roles', label: 'Roles')->allowMultipleChoices()->setChoices(static fn (?User $user): array => $user->getRolesChoices())->setColumns(6);
+        yield BooleanField::new('isVerified', label: 'Email valide')->setColumns(6)->hideOnIndex();
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void

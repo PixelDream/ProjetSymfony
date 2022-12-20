@@ -16,6 +16,14 @@
                 </div>
             </a>
 
+            <a class="col-md-3" href="{{ ea_url().setController('App\\Controller\\Admin\\PropertyCrudController') }}">
+                <div class="card-counter success">
+                    <i class="fa fa-house"></i>
+                    <span class="count-numbers">{{ property_count }}</span>
+                    <span class="count-name">Biens</span>
+                </div>
+            </a>
+
             <div class="col-md-3">
                 <div class="card-counter primary">
                     <i class="fa fa-code-fork"></i>
@@ -27,14 +35,6 @@
             <div class="col-md-3">
                 <div class="card-counter danger">
                     <i class="fa fa-ticket"></i>
-                    <span class="count-numbers">0</span>
-                    <span class="count-name">X</span>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card-counter success">
-                    <i class="fa fa-database"></i>
                     <span class="count-numbers">0</span>
                     <span class="count-name">X</span>
                 </div>
