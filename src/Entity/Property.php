@@ -46,7 +46,7 @@ class Property
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorites')]
     private Collection $favoritesUsers;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 2, nullable: true)]
+    #[ORM\Column(type: Types::INTEGER, precision: 15, scale: 2, nullable: true)]
     private ?string $price = null;
 
     #[ORM\OneToMany(mappedBy: 'property', targetEntity: Image::class, cascade: ['persist'], orphanRemoval: true)]
