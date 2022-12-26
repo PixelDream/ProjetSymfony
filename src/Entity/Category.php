@@ -23,9 +23,13 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Property::class)]
     private Collection $properties;
 
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Research::class)]
+    private Collection $research;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->research = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,6 +82,36 @@ class Category
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection<int, Research>
+     */
+    public function getResearch(): Collection
+    {
+        return $this->research;
+    }
+
+    public function addResearch(Research $research): self
+    {
+        if (!$this->research->contains($research)) {
+            $this->research->add($research);
+            $research->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResearch(Research $research): self
+    {
+        if ($this->research->removeElement($research)) {
+            // set the owning side to null (unless already changed)
+            if ($research->getCategory() === $this) {
+                $research->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 
 

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 #[Broadcast]
 class Property
 {
@@ -28,7 +29,7 @@ class Property
     private ?string $city = null;
 
     #[ORM\Column]
-    private ?int $zip_code = null;
+    private ?int $ZipCode = null;
 
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
@@ -51,6 +52,12 @@ class Property
 
     #[ORM\OneToMany(mappedBy: 'property', targetEntity: Image::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $images;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $created_at = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updated_at = null;
 
     /**
      * @var array|null
@@ -106,12 +113,12 @@ class Property
 
     public function getZipCode(): ?int
     {
-        return $this->zip_code;
+        return $this->ZipCode;
     }
 
-    public function setZipCode(int $zip_code): self
+    public function setZipCode(int $ZipCode): self
     {
-        $this->zip_code = $zip_code;
+        $this->ZipCode = $ZipCode;
 
         return $this;
     }
@@ -241,5 +248,55 @@ class Property
     public function setImageFile($imageFile): void
     {
         $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getFavoritesUsers(): Collection
+    {
+        return $this->favoritesUsers;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $created_at
+     */
+    public function setCreatedAt(?\DateTimeInterface $created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updated_at
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): void
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function updatedTimestamps(): void
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 }

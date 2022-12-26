@@ -33,6 +33,9 @@
     "worker": "php bin/console messenger:consume async -vv"
   },
   "dependencies": {
-    "bootstrap-icons": "^1.10.2"
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+    "bootstrap-icons": "^1.10.2",
+    "snarkdown": "^2.0.0",
+    "vicopo": "^1.2.1"
   }
 }
