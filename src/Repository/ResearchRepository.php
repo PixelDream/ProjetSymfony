@@ -71,7 +71,7 @@ class ResearchRepository extends ServiceEntityRepository
 
     /**
      * @param Property $property
-     * @return array<string>
+     * @return array<Research>
      */
     public function findBySameProperty(Property $property) : array
     {
@@ -89,9 +89,11 @@ class ResearchRepository extends ServiceEntityRepository
         $query->andWhere('r.category = :category OR r.category IS NULL')
             ->setParameter('category', $property->getCategory());
 
+        // 0 <= 50
         $query->andWhere('r.surfaceMin <= :surface OR r.surfaceMin IS NULL')
             ->setParameter('surface', $property->getSurface());
 
+        // 100 >= 50
         $query->andWhere('r.surfaceMax >= :surface OR r.surfaceMax IS NULL')
             ->setParameter('surface', $property->getSurface());
 
@@ -101,7 +103,9 @@ class ResearchRepository extends ServiceEntityRepository
         $query->andWhere('r.priceMax >= :price OR r.priceMax IS NULL')
             ->setParameter('price', $property->getPrice());
 
+        var_dump($query->getQuery()->getSQL());
+
         // fetch all emails of query
-        return $query->select('r.email')->getQuery()->getResult()[0];
+        return $query->getQuery()->getResult();
     }
 }

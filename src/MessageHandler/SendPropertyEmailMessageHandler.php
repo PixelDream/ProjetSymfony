@@ -33,7 +33,14 @@ final class SendPropertyEmailMessageHandler implements MessageHandlerInterface
         $property = $message->getProperty();
 
         // fetch all research in database and compare with property
-        $emails = $this->researchRepository->findBySameProperty($property);
+        $research = $this->researchRepository->findBySameProperty($property);
+
+        $emails = [];
+
+        foreach ($research as $item) {
+            var_dump($item->getEmail());
+            $emails[] = $item->getEmail();
+        }
 
         $this->logger->info('SendPropertyEmailMessageHandler: ' . count($emails) . ' emails found');
 
@@ -44,7 +51,7 @@ final class SendPropertyEmailMessageHandler implements MessageHandlerInterface
             $this->logger->info('SendPropertyEmailMessageHandler: send email to ' . $email);
         }
 
-        // send email to all emails with property informations and link to property
+        // send email to all emails with property information and link to property
         $email = (new TemplatedEmail())
             ->from(new Address('no_reply@safer.fr', 'Safer'))
             ->to(...$emails)
@@ -52,6 +59,7 @@ final class SendPropertyEmailMessageHandler implements MessageHandlerInterface
             ->htmlTemplate('emails/new_research_email.html.twig')
             ->context([
                 'property' => $property,
+                'research' => $research[0]
             ]);
 
         $this->mailer->send($email);

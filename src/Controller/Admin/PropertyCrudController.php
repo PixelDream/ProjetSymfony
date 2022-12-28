@@ -96,13 +96,15 @@ class PropertyCrudController extends AbstractCrudController
     // create new message with sendPropertyEmailMessage when a property is created
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        // if created date is null, it's a new property
+        // if created date is null, it's a new property else it's an update
         if ($entityInstance->getCreatedAt() === null) {
+            parent::persistEntity($entityManager, $entityInstance);
+
             $message = new SendPropertyEmailMessage($entityInstance);
             $this->messageBus->dispatch($message);
+        } else {
+            parent::persistEntity($entityManager, $entityInstance);
         }
-
-        parent::persistEntity($entityManager, $entityInstance);
     }
 
 
