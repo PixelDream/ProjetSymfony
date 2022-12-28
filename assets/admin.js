@@ -8,7 +8,7 @@
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/scss/admin/style.scss';
 
-import './bootstrap';
+//import './bootstrap';
 
 // wait app load
 // document.addEventListener('DOMContentLoaded', function() {
