@@ -30,11 +30,11 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
 
-    public function configureAssets(): Assets
-    {
-        return parent::configureAssets()
-            ->addWebpackEncoreEntry('admin');
-    }
+//    public function configureAssets(): Assets
+//    {
+//        return parent::configureAssets()
+//            ->addWebpackEncoreEntry('admin');
+//    }
 
     public function configureDashboard(): Dashboard
     {
@@ -47,6 +47,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Biens', 'fa fa-list', PropertyCrudController::getEntityFqcn());
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', UserCrudController::getEntityFqcn());
-        yield MenuItem::linkToCrud('Categories', 'fas fa-tags', CategoryCrudController::getEntityFqcn());
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-tags', CategoryCrudController::getEntityFqcn());
     }
 }
