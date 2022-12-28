@@ -21,6 +21,7 @@ class CategoryCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Catégorie')
             ->setEntityLabelInPlural('Catégories')
             ->setSearchFields(['id', 'name'])
+            ->setDefaultSort(['created_at' => 'DESC'])
             ->setEntityPermission('ROLE_ADMIN');
     }
 

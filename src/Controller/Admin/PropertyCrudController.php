@@ -39,6 +39,7 @@ class PropertyCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Bien')
             ->setEntityLabelInPlural('Biens')
+            ->setDefaultSort(['created_at' => 'DESC'])
             ->setSearchFields(['title', 'city', 'zipCode', 'price', 'reference', 'type', 'surface', 'category.name']);
     }
 
