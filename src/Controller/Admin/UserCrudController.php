@@ -39,7 +39,6 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Utilisateur')
             ->setEntityLabelInPlural('Utilisateurs')
-            ->setDefaultSort(['created_at' => 'DESC'])
             ->setSearchFields(['email', 'firstName', 'lastName']);
 
     }
