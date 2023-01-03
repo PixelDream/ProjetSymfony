@@ -1,57 +1,61 @@
-@import "variables.scss";
+@import "variables";
 
-@import "media-queries.scss";
+@import "media-queries";
 
-@import "typography.scss";
+@import "typography";
 
-@import "tabs.scss";
+@import "tabs";
 
-@import "lists.scss";
+@import "lists";
 
-@import "common.scss";
+@import "common";
 
-@import "backgrounds.scss";
+@import "backgrounds";
 
-@import "templates/navigation.scss";
+@import "select";
 
-@import "templates/hero-area.scss";
+@import "templates/navigation";
 
-@import "templates/category-slider.scss";
+@import "templates/hero-area";
 
-@import "templates/user-dashboard.scss";
+@import "templates/category-slider";
 
-@import "templates/homepage.scss";
+@import "templates/user-dashboard";
 
-@import "templates/category.scss";
+@import "templates/homepage";
 
-@import "templates/products.scss";
+@import "templates/category";
 
-@import "templates/widgets.scss";
+@import "templates/products";
 
-@import "templates/header.scss";
+@import "templates/range";
 
-@import "templates/call-to-action.scss";
+@import "templates/widgets";
 
-@import "templates/store.scss";
+@import "templates/header";
 
-@import "templates/store-single.scss";
+@import "templates/call-to-action";
 
-@import "templates/blog.scss";
+@import "templates/store";
 
-@import "templates/popup.scss";
+@import "templates/store-single";
 
-@import "templates/ad-listing.scss";
+@import "templates/blog";
 
-@import "templates/ad-list-view.scss";
+@import "templates/popup";
 
-@import "templates/terms-condition.scss";
+@import "templates/ad-listing";
 
-@import "templates/package.scss";
+@import "templates/ad-list-view";
 
-@import "templates/about-us.scss";
+@import "templates/terms-condition";
 
-@import "templates/contact-us.scss";
+@import "templates/package";
 
-@import "templates/404.scss";
+@import "templates/about-us";
 
-@import "templates/footer.scss";
+@import "templates/contact-us";
+
+@import "templates/404";
+
+@import "templates/footer";

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\PropertyRepository;
 use App\Repository\ResearchRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,10 +12,16 @@ use Symfony\Component\Uid\Uuid;
 class Research
 {
 
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    private ?string $search = null;
+
+    private int $page = 1;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -202,4 +209,37 @@ class Research
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getSearch(): ?string
+    {
+        return $this->search;
+    }
+
+    /**
+     * @param string|null $search
+     */
+    public function setSearch(?string $search): void
+    {
+        $this->search = $search;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage(int $page): void
+    {
+        $this->page = $page;
+    }
+
 }

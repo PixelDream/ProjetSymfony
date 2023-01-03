@@ -69,8 +69,12 @@
 			}
 			a{
 				display: block;
-				color:#777;
-				font-size: 13px;
+				border: 1px solid #404040;
+				color: #c1c1c1;
+				font-weight: 200;
+				padding: 4px 10px;
+				font-size: 12px;
+
 				span {
 					float: right;
 					font-size:10px;
@@ -80,7 +84,7 @@
 				}
 				&:hover{
 					text-decoration: underline;
-					}
+				}
 				i{
 					margin-right: 6px;
 					font-size: 12px;
@@ -121,6 +125,7 @@
 			}
 		}
 		.view-switcher {
+			border-radius: 5px;
 			background: $white;
 			padding: 10px 15px;
 		}

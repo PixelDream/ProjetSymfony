@@ -1,5 +1,4 @@
 import { startStimulusApp } from '@symfony/stimulus-bridge';
-import city_controller from "./controllers/city_controller";
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -7,6 +6,3 @@ export const app = startStimulusApp(require.context(
     true,
     /\.[jt]sx?$/
 ));
-
-// register any custom, 3rd party controllers here
-//app.register('cityController', city_controller);

@@ -1,55 +1,56 @@
 import { Controller } from '@hotwired/stimulus';
+import NiceSelect from "nice-select2/dist/js/nice-select2";
 
 export default class extends Controller {
-    cityInputList = [];
 
-    initialize() {
-        this.cityInputList = document.getElementsByClassName('field-auto-complete');
+    static targets = ['select'];
 
-    }
+    static values = { placeholder: String, searchable: Boolean };
+
+    niceSelector = null;
 
     connect() {
+        this.loadNiceSelect();
 
-        for (let i = 0; i < this.cityInputList.length; i++) {
-            // On auto complete cityInput fetch city by zip code
-            console.info('field', this.cityInputList[0].getElementsByTagName('input'));
-            const select = this.cityInputList[i].getElementsByClassName('ts-dropdown-content')[0];
-            const el = this.cityInputList[i].getElementsByTagName('input')[1];
+        const input = this.element.getElementsByTagName('input')[0];
 
-            console.info('el', el);
-            console.info('select', select);
+        input.addEventListener('keyup', (event) => {
+            event.preventDefault();
 
-            el.addEventListener('keyup', (event) => {
-                const city = event.target.value;
+            const list = this.element.getElementsByTagName('ul')[0];
+            const value = input.value;
 
-                if (city.length < 3) return;
+            if (value.length < 3) return;
 
-                console.log(city);
+            fetch('https://vicopo.selfbuild.fr/cherche/' + value)
+                .then(response => response.json())
+                .then(data => {
+                    // add autocomplete to select
+                    list.innerHTML = '';
+                    this.selectTarget.innerHTML = '';
 
-                // // fetch api on https://vicopo.selfbuild.fr/cherche/{zipCode}
-                fetch('https://vicopo.selfbuild.fr/cherche/' + zipCode)
-                    .then(response => response.json())
-                    .then(data => {
-                        // add autocomplete to select
-                        select.innerHTML = '';
-
-                        for (let i = 0; i < data.cities.length; i++) {
-                            const option = document.createElement('div');
-                            option.dataset.selectable = "";
-                            option.dataset.value = data.cities[i].code;
-                            option.classList.add('option');
-                            option.id = 'Property_category-opt-' + i;
-                            option.innerHTML = data.cities[i].city + ' (' + data.cities[i].code + ')';
-                            select.appendChild(option);
-                        }
-
-                        console.log(data.cities);
-                    });
+                    for (let i = 0; i < data.cities.length; i++) {
+                        const option = document.createElement('option');
+                        option.value = data.cities[i].city;
+                        option.innerHTML = data.cities[i].city + ' (' + data.cities[i].code + ')';
+                        this.selectTarget.appendChild(option);
 
 
-                console.log(city);
+                        const li = document.createElement('li');
+                        li.value = data.cities[i].city;
+                        li.classList.add('option');
+                        li.classList.add('null');
+                        li.innerHTML = data.cities[i].city + ' (' + data.cities[i].code + ')';
+                        list.appendChild(li);
+                    }
+                }).then(() => {
+                    this.niceSelector.update();
+                    input.value = value;
             });
-        }
+        });
+    }
 
+    loadNiceSelect() {
+        this.niceSelector = new NiceSelect(this.selectTarget, {placeholder: this.placeholderValue, searchable: this.searchableValue});
     }
 }

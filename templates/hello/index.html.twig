@@ -10,9 +10,9 @@
    ================================-->
 
 
-<section class="hero-area bg-1 text-center ">
+<section class="hero-area bg-1 text-center overly">
     <!-- Container Start -->
-    <div class="container">
+    <div class="container position-relative">
         <div class="row">
             <div class="col-md-12">
                 <!-- Header Content -->
@@ -23,50 +23,81 @@
                     <div class="short-popular-category-list text-center">
                         <h2>Catégories les plus populaires</h2>
                         <ul class="list-inline">
+                            {%  for category in categories %}
                             <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-bed"></i> Batiments </a></li>
-                            <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-grav"></i> Prairies</a>
+                                <a href="{{ path('app_property_index') }}?category={{ category.id }}">{{ category.name }}</a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="category.html"><i class="fa fa-car"></i> Exploitations</a>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
                 <!-- Advance Search -->
-                <div class="advance-search">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12 col-md-12 align-content-center">
-                                <form>
-                                    <div class="form-row">
-                                        <div class="form-group col-xl-4 col-lg-3 col-md-6">
-                                            <input type="text" class="form-control my-2 my-lg-1" id="inputtext4"
-                                                   placeholder="Que recherchez-vous?">
-                                        </div>
-                                        <div class="form-group col-lg-3 col-md-6">
-                                            <select class="w-100 form-control mt-lg-1 mt-md-2">
-                                                <option>Catégorie</option>
-                                                <option value="1">Mieux notés</option>
-                                                <option value="2">Prix minimum</option>
-                                                <option value="4">Prix maximum</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-lg-3 col-md-6">
-                                            <input type="text" class="form-control my-2 my-lg-1" id="inputLocation4"
-                                                   placeholder="Localisation">
-                                        </div>
-                                        <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
-                                            <button type="submit" class="btn btn-primary active w-100">Recherchez
-                                            </button>
-                                        </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Advance Search -->
+                            {% form_theme form with ['foundation_5_layout.html.twig'] only %}
+                            {{ form_start(form) }}
+                            <div class="advance-search nice-select-white">
+                                <div class="row align-items-center">
+                                    <div class="form-group col-xl-4 col-lg-4 col-md-6">
+                                        {{ form_row(form.search) }}
                                     </div>
-                                </form>
+
+                                    <div class="form-group col-lg-2 col-md-6">
+                                        {{ form_row(form.type) }}
+                                    </div>
+
+                                    <div class="form-group col-lg-2 col-md-6">
+                                        {{ form_row(form.category) }}
+                                    </div>
+
+                                    <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">
+                                        {{ form_row(form.city) }}
+                                    </div>
+
+                                    <div class="form-group col-xl-1 col-lg-2 col-md-6">
+                                        <button type="submit" class="btn btn-primary active">Rechercher</button>
+                                    </div>
+                                </div>
                             </div>
+                            {{ form_end(form, {render_rest: false}) }}
                         </div>
                     </div>
                 </div>
+
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <div class="advance-search nice-select-white">#}
+{#                            <div class="row align-items-center">#}
+{#                                {% form_theme form with ['foundation_5_layout.html.twig'] only %}#}
+{#                                {{ form_start(form) }}#}
+{#                                    <div class="form-row">#}
+{#                                        <div class="form-group col-xl-3 col-lg-3 col-md-6">#}
+{#                                            {{ form_row(form.search) }}#}
+{#                                        </div>#}
+
+{#                                        <div class="form-group col-lg-2 col-md-6">#}
+{#                                            {{ form_row(form.type) }}#}
+{#                                        </div>#}
+
+{#                                        <div class="form-group col-lg-2 col-md-6">#}
+{#                                            {{ form_row(form.category) }}#}
+{#                                        </div>#}
+
+{#                                        <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">#}
+{#                                            {{ form_row(form.city) }}#}
+{#                                        </div>#}
+
+{#                                        <div class="form-group col-xl-1 col-lg-2 col-md-6">#}
+{#                                            <button type="submit" class="btn btn-primary active">Rechercher</button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {{ form_end(form, {render_rest: false}) }}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
         </div>
     </div>
@@ -79,52 +110,86 @@
 ============================================-->
 
 <section class="popular-deals section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>Bens d'exception</h2>
+                    <p>Découvrez tous nos biens disponibles à la vente ou à la location</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- offer 01 -->
+            <div  class="col-lg-12">
+                <div  class="trending-ads-slide row">
+                    {% for property in properties %}
+                        {% set propertyPath = path('app_property_show', {id: property.id}) %}
+                        <div class="col-lg-4 col-md-6">
+                            <!-- product card -->
+                            <div class="product-item bg-light">
+                                <div class="card">
+                                    <div class="thumb-content">
+                                        <!-- <div class="price">$200</div> -->
+                                        <a href="{{ propertyPath }}">
+                                            <img class="card-img-top img-fluid img-card-content" src="{{ asset('image/property/' ~ property.images.first) }}"
+                                                 alt="{{ property.title }}">
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title"><a href="{{ propertyPath }}">{{ property.title }}</a></h4>
+                                        <p class="card-text">{{ property.description|u.truncate(55, ' ...', false) }}</p>
 
-    <div class="row">
-        <!-- offer 01 -->
-        <div  class="col-lg-12">
-            <div  class="trending-ads-slide">
-                {% for property in properties  %}
-
-                <div class="col-sm-12 col-lg-4">
-                    <!-- product card -->
-                    <div class="product-item bg-light">
-                        <div class="card">
-                            <div class="thumb-content">
-                                <!-- <div class="price">$200</div> -->
-                                <a href="single.html">
-                                    <img class="card-img-top img-fluid" src="images/products/products-1.jpg"
-                                         alt="Card image cap">
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title"><a href="single.html">{{ property.title }}</a></h4>
-                                <ul class="list-inline product-meta">
-                                    <li class="list-inline-item">
-                                        <a href="single.html"><i class="fa fa-folder-open-o"></i>{{ property.getCategory() }}</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="category.html"><i class="fa fa-calendar"></i>{{ property.getUpdatedAt() | date('d-m-Y') }}</a>
-                                    </li>
-                                </ul>
-                                <p class="card-text"></p>
-                                <div class="product-ratings">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                        <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    </ul>
+                                        {% if property.price != 0 %}
+                                            <p class="h3">{{ property.price|number_format(0, '.', ' ') }} € {{ property.type == 'Location' ? ' / mois' : '' }}</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
+{#                    {% for property in properties  %}#}
+
+{#                    <div class="col-sm-12 col-lg-4">#}
+{#                        <!-- product card -->#}
+{#                        <div class="product-item bg-light">#}
+{#                            <div class="card">#}
+{#                                <div class="thumb-content">#}
+{#                                    <!-- <div class="price">$200</div> -->#}
+{#                                    <a href="single.html">#}
+{#                                        <img class="card-img-top img-fluid" src="images/products/products-1.jpg"#}
+{#                                             alt="Card image cap">#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                                <div class="card-body">#}
+{#                                    <h4 class="card-title"><a href="single.html">{{ property.title }}</a></h4>#}
+{#                                    <ul class="list-inline product-meta">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="single.html"><i class="fa fa-folder-open-o"></i>{{ property.getCategory() }}</a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="category.html"><i class="fa fa-calendar"></i>{{ property.getUpdatedAt() | date('d-m-Y') }}</a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                    <p class="card-text"></p>#}
+{#                                    <div class="product-ratings">#}
+{#                                        <ul class="list-inline">#}
+{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
+{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
+{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
+{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
+{#                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
 
 
+{#                    </div>#}
+
+{#                    {% endfor %}#}
                 </div>
-
-                {% endfor %}
             </div>
         </div>
     </div>
@@ -142,22 +207,22 @@
             <div class="col-12">
                 <!-- Section title -->
                 <div class="section-title">
-                    <h2>CATEGORIES DE BIENS DISPONIBLES</h2>
+                    <h2>Catégorie des biens disponibles</h2>
                     <p>Découvrez la diversité de nos biens à travers les catégories auxquels ils appartiennent. </p>
                 </div>
-                <div class="row">
+                <div class="row justify-content-around">
                     <!-- Category list -->
-                    {% for categorie in categories %}
-                    <div class="col-lg-3">
+                    {% for category in categories %}
+                    <div class="col-lg-2">
                         <div class="category-block">
                             <div class="header">
-                                <i class="fa fa-laptop icon-bg-1"></i>
-                                <h4>{{ categorie.name }}</h4>
+{#                                <i class="fa fa-laptop icon-bg-1"></i>#}
+                                <h4>{{ category.name }}</h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="category.html">Disponibles <span>{{ categorie.properties | length }}</span></a></li>
-                                <li><a href="category.html">Locations <span>{{ categorie.properties| filter(property => property.type == 'Location') | length }}</span></a></li>
-                                <li><a href="category.html">Vente <span>{{ categorie.properties| filter(property => property.type == 'Vente') | length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}">Disponibles <span>{{ category.properties|length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}&type=Location">Locations <span>{{ category.properties|filter(p => p.type == 'Location')|length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}&type=Vente">Vente <span>{{ category.properties|filter(p => p.type == 'Vente')|length }}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -177,7 +242,7 @@
 
 <section class="call-to-action overly bg-3 section-sm">
     <!-- Container Start -->
-    <div class="container">
+    <div class="container position-relative">
         <div class="row justify-content-md-center text-center">
             <div class="col-md-8">
                 <div class="content-holder">
