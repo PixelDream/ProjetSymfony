@@ -3,7 +3,7 @@ import NiceSelect from "nice-select2/dist/js/nice-select2";
 
 export default class extends Controller {
 
-    static targets = ['select'];
+    static targets = ['input'];
 
     static values = { placeholder: String, searchable: Boolean };
 
@@ -12,45 +12,42 @@ export default class extends Controller {
     connect() {
         this.loadNiceSelect();
 
-        const input = this.element.getElementsByTagName('input')[0];
+        const span = this.element.getElementsByTagName('span')[0];
+        const inputHidden = this.element.getElementsByTagName('input')[0];
+        const inputSearch = this.element.getElementsByTagName('input')[1];
 
-        input.addEventListener('keyup', (event) => {
+        if (inputHidden.value) span.innerHTML = inputHidden.value;
+
+        inputSearch.addEventListener('keyup', (event) => {
             event.preventDefault();
 
             const list = this.element.getElementsByTagName('ul')[0];
-            const value = input.value;
+            const value = inputSearch.value;
 
             if (value.length < 3) return;
 
             fetch('https://vicopo.selfbuild.fr/cherche/' + value)
                 .then(response => response.json())
                 .then(data => {
-                    // add autocomplete to select
                     list.innerHTML = '';
-                    this.selectTarget.innerHTML = '';
+                    this.inputTarget.value = '';
 
                     for (let i = 0; i < data.cities.length; i++) {
                         const option = document.createElement('option');
                         option.value = data.cities[i].city;
                         option.innerHTML = data.cities[i].city + ' (' + data.cities[i].code + ')';
-                        this.selectTarget.appendChild(option);
+                        this.inputTarget.appendChild(option);
 
 
-                        const li = document.createElement('li');
-                        li.value = data.cities[i].city;
-                        li.classList.add('option');
-                        li.classList.add('null');
-                        li.innerHTML = data.cities[i].city + ' (' + data.cities[i].code + ')';
-                        list.appendChild(li);
+                        this.inputTarget.value = data.cities[i].city;
                     }
                 }).then(() => {
                     this.niceSelector.update();
-                    input.value = value;
             });
         });
     }
 
     loadNiceSelect() {
-        this.niceSelector = new NiceSelect(this.selectTarget, {placeholder: this.placeholderValue, searchable: this.searchableValue});
+        this.niceSelector = new NiceSelect(this.inputTarget, {placeholder: this.placeholderValue, searchable: this.searchableValue});
     }
 }

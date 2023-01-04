@@ -40,7 +40,7 @@
                             {{ form_start(form) }}
                             <div class="advance-search nice-select-white">
                                 <div class="row align-items-center">
-                                    <div class="form-group col-xl-4 col-lg-4 col-md-6">
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6">
                                         {{ form_row(form.search) }}
                                     </div>
 
@@ -52,7 +52,7 @@
                                         {{ form_row(form.category) }}
                                     </div>
 
-                                    <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">
+                                    <div class="form-group col-lg-3 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">
                                         {{ form_row(form.city) }}
                                     </div>
 
@@ -114,7 +114,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h2>Bens d'exception</h2>
+                    <h2>Biens d'exception</h2>
                     <p>Découvrez tous nos biens disponibles à la vente ou à la location</p>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                 </div>
                 <div class="row justify-content-around">
                     <!-- Category list -->
-                    {% for category in categories %}
+                    {% for key, category in categories %}
                     <div class="col-lg-2">
                         <div class="category-block">
                             <div class="header">
@@ -220,9 +220,9 @@
                                 <h4>{{ category.name }}</h4>
                             </div>
                             <ul class="category-list">
-                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}">Disponibles <span>{{ category.properties|length }}</span></a></li>
-                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}&type=Location">Locations <span>{{ category.properties|filter(p => p.type == 'Location')|length }}</span></a></li>
-                                <li><a href="{{ path('app_property_index') }}?category={{ category.id }}&type=Vente">Vente <span>{{ category.properties|filter(p => p.type == 'Vente')|length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ key }}">Disponibles <span>{{ category.properties|length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ key }}&type=Location">Locations <span>{{ category.properties|filter(p => p.type == 'Location')|length }}</span></a></li>
+                                <li><a href="{{ path('app_property_index') }}?category={{ key }}&type=Vente">Vente <span>{{ category.properties|filter(p => p.type == 'Vente')|length }}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->

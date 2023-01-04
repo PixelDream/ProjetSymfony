@@ -28,15 +28,15 @@ class ResearchType extends AbstractType
                 ]
             ])
 
-            ->add('city', ChoiceType::class, [
+            ->add('city', null, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Ville',
                     'class' => 'w-100 form-control my-2 my-lg-0',
-                    'data-city-target' => 'select',
+                    'data-city-target' => 'input',
                 ],
-                'choices' => $choiceMapper,
+//                'choices' => $choiceMapper,
             ])
 //            ->add('zipCode')
             ->add('surfaceMin', NumberType::class, [

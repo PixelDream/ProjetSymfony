@@ -1,3 +1,5 @@
+@import "../variables";
+
 .navigation {
 	padding: 20px 0;
 
@@ -37,7 +39,7 @@
 }
 
 .add-button {
-	background: #28a745;
+	background: $primary-color;
 	color: $white;
 	padding: 8px 20px !important;
 	display: inline-block;
@@ -73,7 +75,7 @@
 
 		&.active {
 			.nav-link {
-				color: $primary-color;
+				color: #ec9e1c;
 			}
 		}
 	}

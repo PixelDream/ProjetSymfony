@@ -68,6 +68,7 @@ class Property
     {
         $this->users = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->favoritesUsers = new ArrayCollection();
     }
 
     public function getId(): ?int

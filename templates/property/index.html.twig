@@ -12,27 +12,27 @@
                 <div class="col-md-12">
                     <!-- Advance Search -->
                     <div class="advance-search nice-select-white">
-                            <div class="row align-items-center">
-                                <div class="form-group col-xl-3 col-lg-3 col-md-6">
-                                    {{ form_row(form.search) }}
-                                </div>
-
-                                <div class="form-group col-lg-2 col-md-6">
-                                    {{ form_row(form.type) }}
-                                </div>
-
-                                <div class="form-group col-lg-2 col-md-6">
-                                    {{ form_row(form.category) }}
-                                </div>
-
-                                <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">
-                                    {{ form_row(form.city) }}
-                                </div>
-
-                                <div class="form-group col-xl-1 col-lg-2 col-md-6">
-                                    <button type="submit" class="btn btn-primary active">Rechercher</button>
-                                </div>
+                        <div class="row align-items-center">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-6">
+                                {{ form_row(form.search) }}
                             </div>
+
+                            <div class="form-group col-lg-2 col-md-6">
+                                {{ form_row(form.type) }}
+                            </div>
+
+                            <div class="form-group col-lg-2 col-md-6">
+                                {{ form_row(form.category) }}
+                            </div>
+
+                            <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">
+                                {{ form_row(form.city) }}
+                            </div>
+
+                            <div class="form-group col-xl-1 col-lg-2 col-md-6">
+                                <button type="submit" class="btn btn-primary active">Rechercher</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,17 +75,6 @@
 {#                                            </li>#}
 {#                                        {% endif %}#}
 {#                                    {% endfor %}#}
-                                </ul>
-                            </div>
-                        {% endif %}
-
-                        {% if categories and app.request.query.get('category') is empty %}
-                            <div class="widget category-list">
-                                <h4 class="widget-header">Toutes les catégories</h4>
-                                <ul class="category-list">
-                                    {% for key, category in categories %}
-                                        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'category': key }))) }}">{{ category.name }} <span>{{ category.properties|length }}</span></a></li>
-                                    {% endfor %}
                                 </ul>
                             </div>
                         {% endif %}
@@ -259,6 +248,9 @@
                                         <!-- product card -->
                                         <div class="product-item bg-light">
                                             <div class="card">
+                                                <div class="card-action">
+                                                    <i class="bi bi-heart-fill"></i>
+                                                </div>
                                                 <div class="thumb-content">
                                                     <!-- <div class="price">$200</div> -->
                                                     <a href="{{ propertyPath }}">
