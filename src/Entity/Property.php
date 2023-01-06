@@ -331,4 +331,9 @@ class Property
 
         return $this;
     }
+
+    public function location(): string
+    {
+        return $this->getCity() . ' ' . $this->getZipCode();
+    }
 }

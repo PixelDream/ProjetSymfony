@@ -1,0 +1,48 @@
+{% extends 'base_account.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+    <div class="widget dashboard-container my-adslist">
+        <h3 class="widget-header">Mes favoris</h3>
+        <table class="table table-responsive product-dashboard-table">
+            <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product Title</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for favory in app.user.favorites %}
+                    <tr>
+                        <td class="product-thumb">
+                            <img width="120px" height="auto" src="{{ asset('image/property/' ~ favory.images.first) }}" alt="image description"></td>
+                        <td class="product-details">
+                            <h3 class="title">{{ favory.title }}</h3>
+                            <span class="add-id"><strong>REF :</strong> {{ favory.reference }}</span>
+                            <span class="location"><strong>Localisation : </strong>{{ favory.location }}</span>
+                        </td>
+                        <td class="product-category"><span class="categories">Laptops</span></td>
+                        <td class="action" data-title="Action">
+                            <div class="">
+                                <ul class="list-inline justify-content-center">
+                                    <li class="list-inline-item">
+                                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="dashboard-my-ads.html">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- pagination -->
+
+    <!-- pagination -->
+{% endblock %}

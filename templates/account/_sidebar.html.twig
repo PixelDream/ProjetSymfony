@@ -1,0 +1,19 @@
+<div class="sidebar">
+    <!-- User Widget -->
+    <div class="widget user-dashboard-profile">
+        <!-- User Name -->
+        <h5 class="text-center">{{ app.user.fullName }}</h5>
+    </div>
+
+    <!-- Dashboard Links -->
+    <div class="widget user-dashboard-menu">
+        <ul>
+            <li {{ app.request.get('_route') == 'app_account' ? 'class="active"' }}>
+                <a href="{{ path('app_account') }}"><i class="fa fa-user"></i> Mon compte</a>
+            </li>
+            <li {{ app.request.get('_route') == 'app_account_favory' ? 'class="active"' }}>
+                <a href="{{ path('app_account_favory') }}"><i class="fa fa-bookmark-o"></i>  Mes annonces favorites</a>
+            </li>
+        </ul>
+    </div>
+</div>

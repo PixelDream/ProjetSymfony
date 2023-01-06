@@ -13,10 +13,9 @@ export default class extends Controller {
         this.loadNiceSelect();
 
         const span = this.element.getElementsByTagName('span')[0];
-        const inputHidden = this.element.getElementsByTagName('input')[0];
         const inputSearch = this.element.getElementsByTagName('input')[1];
 
-        if (inputHidden.value) span.innerHTML = inputHidden.value;
+        if (this.inputTarget.value) span.innerHTML = this.inputTarget.value;
 
         inputSearch.addEventListener('keyup', (event) => {
             event.preventDefault();

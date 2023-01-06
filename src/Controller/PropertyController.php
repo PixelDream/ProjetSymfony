@@ -8,10 +8,12 @@ use App\Form\PropertyType;
 use App\Form\ResearchType;
 use App\Repository\CategoryRepository;
 use App\Repository\PropertyRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Orm\EntityPaginatorInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,11 +61,26 @@ class PropertyController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_property_show', methods: ['GET'])]
-    public function show(Property $property): Response
+    public function show(Property $property, UserRepository $userRepository, Request $request): Response
     {
+        $userFavorites = $userRepository->getFavorites($this->getUser(), $request);
+
         return $this->render('property/show.html.twig', [
             'property' => $property,
+            'userFavorites' => $userFavorites
         ]);
     }
+
+    // toggle favorite with the same schematics as favorite
+    #[Route('/{id}/toggle-favorite', name: 'app_property_toggle_favorite')]
+    public function toggleFavorite(Property $property, Request $request, UserRepository $userRepository): Response
+    {
+        $response = $this->redirectToRoute('app_property_show', ['id' => $property->getId()]);
+
+        $userRepository->togglePropertyFavorite($this->getUser(), $property, $request, $response);
+
+        return $response;
+    }
+
 
 }

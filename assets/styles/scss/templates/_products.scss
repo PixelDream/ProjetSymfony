@@ -18,22 +18,32 @@
 
 		.card-action {
 			display: none;
+			position: absolute;
+			z-index: 1;
+			padding: 10px 9px 8px 9px;
+			margin: 8px;
+			line-height: 10px;
+			border-radius: 50%;
+			right: 0;
+			background-color: white;
+			cursor: pointer;
+
+			&.active {
+				display: unset;
+				color: red;
+			}
 		}
 
 		&:hover {
-			.card.card-action {
-				position: absolute;
-				z-index: 1;
-				padding: 10px 9px 8px 9px;
-				margin: 8px;
-				line-height: 10px;
-				border-radius: 50%;
-				right: 0;
-				background-color: white;
-				cursor: pointer;
+			.card-action {
+				display: unset;
 
 				&:hover {
 					color: red;
+
+					&, &.active {
+						color: black;
+					}
 				}
 			}
 		}
