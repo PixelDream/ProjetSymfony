@@ -5,11 +5,20 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Image;
 use App\Entity\Property;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $dataSet = [
@@ -345,6 +354,33 @@ class AppFixtures extends Fixture
             ]
         ];
 
+
+        // Créer 5 utilisateurs dont un avec le rôle admin
+        for ($i = 0; $i < 4; $i++) {
+            $user = new User();
+            $user->setEmail('user' . $i . '@safer.com');
+            $user->setFirstName('John ' . $i);
+            $user->setLastName('Doe');
+            $user->setPhone("0299763546");
+            $user->setIsVerified($i != 3);
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
+            $manager->persist($user);
+        }
+
+        $admin = new User();
+        $admin->setEmail('admin@safer.com');
+        $admin->setFirstName('John Admin');
+        $admin->setLastName('Doe');
+        $admin->setPhone("0654672311");
+        $admin->setIsVerified(true);
+        $admin->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
+        $admin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
+
+        $manager->flush();
+
+
+
         $categories = [];
 
         foreach ($dataSet as $data) {
@@ -391,6 +427,7 @@ class AppFixtures extends Fixture
             $property->setPrice($data['Prix'] == "Nous consulter" ? null : $data['Prix']);
             $property->setType($data['Type']);
             $property->setCategory($category);
+            $property->setAuthor($admin);
             $property->addImage($image);
             $manager->persist($property);
         }

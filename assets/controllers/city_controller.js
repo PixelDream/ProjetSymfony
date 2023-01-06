@@ -1,15 +1,15 @@
-import { Controller } from '@hotwired/stimulus';
-import NiceSelect from "nice-select2/dist/js/nice-select2";
+import {Controller} from '@hotwired/stimulus';
+//import NiceSelect from "nice-select2/dist/js/nice-select2";
 
 export default class extends Controller {
 
     static targets = ['input'];
 
-    static values = { placeholder: String, searchable: Boolean };
+    static values = {placeholder: String, searchable: Boolean};
 
     niceSelector = null;
 
-    connect() {
+  /*  connect() {
         this.loadNiceSelect();
 
         const span = this.element.getElementsByTagName('span')[0];
@@ -42,12 +42,15 @@ export default class extends Controller {
                         this.inputTarget.value = data.cities[i].city;
                     }
                 }).then(() => {
-                    this.niceSelector.update();
+                this.niceSelector.update();
             });
         });
-    }
+    }*/
 
-    loadNiceSelect() {
-        this.niceSelector = new NiceSelect(this.inputTarget, {placeholder: this.placeholderValue, searchable: this.searchableValue});
-    }
+    /*loadNiceSelect() {
+        this.niceSelector = new NiceSelect(this.inputTarget, {
+            placeholder: this.placeholderValue,
+            searchable: this.searchableValue
+        });
+    }*/
 }

@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -64,9 +65,10 @@ class PropertyCrudController extends AbstractCrudController
         yield AssociationField::new('category', label: 'Catégorie')
             ->setColumns(6);
         yield MoneyField::new('price', label: 'Prix')
+            ->setStoredAsCents(false)
+            ->setNumDecimals(0)
             ->setCurrency('EUR')
             ->setColumns(6);
-
         yield AssociationField::new('images', label: 'Photos')->onlyOnIndex();
         yield CollectionField::new('images', label: 'Photos')
             ->setEntryType(ImageType::class)

@@ -29,3 +29,8 @@ package-lock.json
 
 /db/
 /public/image/property/
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

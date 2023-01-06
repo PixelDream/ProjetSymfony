@@ -43,9 +43,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Property::class, inversedBy: 'favoritesUsers')]
     private Collection $favorites;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: property::class)]
+    private Collection $createProperties;
+
     public function __construct()
     {
         $this->favorites = new ArrayCollection();
+        $this->createProperties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,5 +195,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             'Utilisateur' => 'ROLE_USER',
             'Administrateur' => 'ROLE_ADMIN',
         ];
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, property>
+     */
+    public function getCreateProperties(): Collection
+    {
+        return $this->createProperties;
+    }
+
+    public function addCreateProperty(property $createProperty): self
+    {
+        if (!$this->createProperties->contains($createProperty)) {
+            $this->createProperties->add($createProperty);
+            $createProperty->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreateProperty(property $createProperty): self
+    {
+        if ($this->createProperties->removeElement($createProperty)) {
+            // set the owning side to null (unless already changed)
+            if ($createProperty->getAuthor() === $this) {
+                $createProperty->setAuthor(null);
+            }
+        }
+
+        return $this;
     }
 }

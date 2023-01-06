@@ -4,123 +4,144 @@
 
 {% block body %}
 
-<html lang="fr">
+    <html lang="fr">
 
-<body class="body-wrapper">
+    <body class="body-wrapper">
 
-<section class="section bg-gray">
-    <!-- Container Start -->
-    <div class="container">
-        <div class="row">
-            <!-- Left sidebar -->
-            <div class="col-lg-8">
-                <div class="product-details">
-                    <h1 class="product-title">{{ property.title }}</h1>
-                    <div class="product-meta">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> {{ property.type }}</li>
-                            <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Référence : {{ property.reference }}</li>
-                            <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> {{ property.category }}
-                            </li>
-                        </ul>
-                    </div>
+    <section class="section bg-gray">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <!-- Left sidebar -->
+                <div class="col-lg-8">
+                    <div class="product-details">
+                        <h1 class="widget price text-left text-white">{{ property.title }}</h1>
+                        <div class="product-meta">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> {{ property.type }}
+                                </li>
+                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> {{ property.category }}
+                                </li>
+                                <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Référence
+                                    : {{ property.reference }}</li>
+                            </ul>
+                        </div>
+                        <br>
+                        <!-- product slider -->
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                            <div class="carousel-indicators">
+                                {% for key, image  in property.images %}
+                                    {% if property.images.count > 1 %}
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ key }}" {% if loop.first %}class="active"
+                                            aria-current="true"{% endif %} aria-label="Slide {{ key }}"></button>
+                                    {% endif %}
+                                {% endfor %}
 
-                    <!-- product slider -->
-                    <div class="product-slider">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-
+                            </div>
                             <div class="carousel-inner">
                                 {% for image in property.images %}
                                     <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                        <img class="d-block w-100" src="{{ asset('image/property/' ~ image) }}" alt="{{ image }}">
+                                        <img src="{{ asset('image/property/' ~ image) }}" class="d-block w-100" height="500"
+                                             alt="photo">
                                     </div>
                                 {% endfor %}
+
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                               data-slide="prev">
+                            {% if property.images.count > 1 %}
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                               data-slide="next">
+                                <span class="visually-hidden">Précédent</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only"></span>
-                            </a>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                            {% endif %}
                         </div>
-                    </div>
-                    <!-- product slider -->
 
-                    <div class="content mt-5 pt-5">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                 aria-labelledby="pills-home-tab">
-                                <h3 class="tab-title">Description du bien</h3>
-                                <p>{{ property.description }}</p>
+
+                        <!-- product slider -->
+
+                        <div class="content mt-2 pt-5">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                     aria-labelledby="pills-home-tab">
+                                    <h3 class="tab-title">Description du bien</h3>
+                                    <p>{{ property.description }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <div class="widget price text-center">
-                        <h4>Prix :</h4>
-                        {% if property.type == "Vente" %}
-                            <p>{{ property.price }}€</p>
-                        {% else %}
-                            <p>{{ property.price }} € / mois</p>
-                        {% endif %}
+
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="widget price text-center">
+                            <h4>Prix :</h4>
+                            {% if property.type == "Vente" %}
+                                <p>{{ property.price }}€</p>
+                            {% else %}
+                                <p>{{ property.price }} € / mois</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <table class="table table-bordered product-table">
+                                <h3 class="tab-title">Spécificités</h3>
+                                <tbody>
+                                <tr>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>{{ property.type }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Catégorie</td>
+                                    <td>{{ property.category }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Référence</td>
+                                    <td>{{ property.reference }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surface</td>
+                                    <td>{{ property.surface }} m²</td>
+                                </tr>
+                                <tr>
+                                    <td>Localisation</td>
+                                    <td>{{ property.zipCode }} {{ property.city }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date de l'annonce</td>
+                                    <td>{{ property.createdAt|date("d/m/Y H:i") }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="widget user text-center">
+                                <div class="widget-header">
+                                    <h3> Contactez pour plus d'informations</h3>
+                                </div>
+
+                                <h4>{{ property.author.firstName }} {{ property.author.lastName }}</h4>
+                                <br>
+                                <p>Téléphone : {{ property.author.phone }}</p>
+                                <p>Email : {{ property.author.email }}</p>
+                            </div>
+
+                        </div>
+
+                        <div data-controller="oms"  style="height:250px"></div>
+                        <div data-controller="location" data-location-searchable-value="true" data-location-placeholder-value="Localisation">
+                            <input class="w-100 my-2 form-control" type="text" name="ville" data-location-target="input">
+                        </div>
                     </div>
-                    <div>
-                        <table class="table table-bordered product-table">
-                            <h3 class="tab-title">Spécificités</h3>
-                            <tbody>
-                            <tr>
-                            <tr>
-                                <td>Type</td>
-                                <td>{{ property.type }}</td>
-                            </tr>
-                            <tr>
-                                <td>Catégorie</td>
-                                <td>{{ property.category }}</td>
-                            </tr>
-                            <tr>
-                                <td>Référence</td>
-                                <td>{{ property.reference }}</td>
-                            </tr>
-                            <tr>
-                                <td>Surface</td>
-                                <td>{{ property.surface }} m²</td>
-                            </tr>
-                            <tr>
-                                <td>Localisation</td>
-                                <td>{{ property.zipCode }} {{ property.city }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="map" style="width:420px;height:420px;background:grey"></div>
-                    <script>
-                        function Map() {
-                            var mapOptions = {
-                                center:new google.maps.LatLng(51.508742,-0.120850),
-                                zoom: 10,
-                                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            }
-                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                        }
-                    </script>
-                    <script src="https://maps.googleapis.com/maps/api/js?callback=Map"></script>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
+    </body>
+    </html>
 
 {% endblock %}

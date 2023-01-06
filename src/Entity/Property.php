@@ -64,6 +64,13 @@ class Property
      */
     private ?array $imageFile = null;
 
+    #[ORM\ManyToOne(inversedBy: 'properties')]
+    private ?Location $location = null;
+
+    #[ORM\ManyToOne(inversedBy: 'createProperties')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -299,5 +306,29 @@ class Property
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }
