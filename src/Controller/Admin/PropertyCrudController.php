@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\Fields\AutoCompleteField;
 use App\Entity\Property;
+use App\Entity\User;
 use App\Form\ImageType;
 use App\Message\SendPropertyEmailMessage;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +42,7 @@ class PropertyCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Bien')
             ->setEntityLabelInPlural('Biens')
             ->setDefaultSort(['created_at' => 'DESC'])
-            ->setSearchFields(['title', 'city', 'zipCode', 'price', 'reference', 'type', 'surface', 'category.name']);
+            ->setSearchFields(['title', 'city', 'zipCode', 'price', 'reference', 'type', 'surface', 'category.name', 'author']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -78,6 +79,9 @@ class PropertyCrudController extends AbstractCrudController
             ->setFormTypeOption('propertyFile', 'imageFile')
             ->setTemplatePath('admin/fields/images.html.twig')
             ->onlyOnDetail();
+        yield AssociationField::new('author', label : 'Auteur')
+            ->setColumns(6)
+            ->autocomplete();
 //        yield ChoiceField::new('city', 'Ville')
 //            ->setVirtual(true)
 //            ->hideOnIndex()
@@ -110,11 +114,18 @@ class PropertyCrudController extends AbstractCrudController
         }
     }
 
-
     public function configureActions(Actions $actions): Actions
     {
         return $actions
             ->add('index', 'detail');
     }
+
+    public function createEntity(string $entityFqcn)
+    {
+        $property = new Property();
+        $property->setAuthor($this->getUser());
+        return $property;
+    }
+
 
 }

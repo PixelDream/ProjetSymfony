@@ -37,6 +37,7 @@
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "autocomplete.js": "^0.38.1",
     "bootstrap-icons": "^1.10.2",
+    "jquery": "^3.6.3",
     "leaflet": "^1.9.3",
     "nouislider": "^15.6.1",
     "snarkdown": "^2.0.0",

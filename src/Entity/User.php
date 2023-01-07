@@ -79,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -245,4 +245,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->firstName . ' ' . $this->lastName;
     }
+
+    public function __toString(): string
+    {
+        return $this->fullName();
+    }
+
+
 }
