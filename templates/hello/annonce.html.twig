@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+
+    <section class="page-title">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-center">
+                    <!-- Title text -->
+                    <h3>INSCRIVEZ VOUS</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </section>
+
+    <section class="dashboard section">
+
+                            <div class="row justify-content-center">
+                                <div STYLE="width: 100%" class="col-lg-5 col-md-8 align-item-center">
+                                    <div class="border border">
+                                        <form name="registration_form1" method="post">
+                                            <fieldset class="p-4">
+                                                <div class="mb-3"><label for="registration_form1_firstName" class="form-label required">NOM</label><input type="text" id="registration1_form_firstName" name="registration_form[firstName]" required="required" maxlength="255" class="mb-3 form-control">        </div>
+                                                <div class="mb-3"><label for="registration_form1_lastName" class="form-label required">PRENOM</label><input type="text" id="registration1_form_lastName" name="registration_form[lastName]" required="required" maxlength="255" class="mb-3 form-control">        </div>
+                                                <div class="mb-3"><label for="registration_form1_email" class="form-label required">ADRESSE MAIL</label><input type="email" id="registration1_form_email" name="registration_form[email]" required="required" maxlength="180" class="mb-3 form-control">        </div>
+                                                <div class="mb-3"><label for="registration_form1_telephone" class="form-label required">TELEPHONE</label><input type="tel" id="registration1_form_telephone" name="registration_form[telephone]" required="required" class="mb-3 form-control">        </div>
+                                                <div class="mb-3"><div class="form1-check"><input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
+                                                        <label class="form-check-label required" for="registration_form_agreeTerms">Agree terms</label></div>        </div>
+                                                <button type="submit" class="btn btn-primary font-weight-bold mt-3 float-end">Inscription</button>
+                                            </fieldset>
+                                            <input type="hidden" id="registration_form__token" name="registration_form[_token]" value="6d280a3.xuY5o_WsgpDtASZ8TxuyCPJgTSHjdeJwmvC0wsEjhgE._qhVlI3r16mMTBZPGkzAO4AQekqgNJMR86XD-od07XT1tVbRxYHxvaxlTQ"></form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <!-- Row End -->
+
+        <!-- Container End -->
+    </section>
+
+{% endblock %}

@@ -20,16 +20,6 @@
                     <h1>Devenez propriétaire ou locataire aujourd'hui </h1>
                     <p>Appartenez aux milliers de personnes qui achetents et louent <br>tous les jours à travers la
                         France</p>
-                    <div class="short-popular-category-list text-center">
-                        <h2>Catégories les plus populaires</h2>
-                        <ul class="list-inline">
-                            {%  for category in categories %}
-                            <li class="list-inline-item">
-                                <a href="{{ path('app_property_index') }}?category={{ category.id }}">{{ category.name }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
                 </div>
                 <!-- Advance Search -->
                 <div class="container">
@@ -66,38 +56,6 @@
                     </div>
                 </div>
 
-{#                <div class="row">#}
-{#                    <div class="col-md-12">#}
-{#                        <div class="advance-search nice-select-white">#}
-{#                            <div class="row align-items-center">#}
-{#                                {% form_theme form with ['foundation_5_layout.html.twig'] only %}#}
-{#                                {{ form_start(form) }}#}
-{#                                    <div class="form-row">#}
-{#                                        <div class="form-group col-xl-3 col-lg-3 col-md-6">#}
-{#                                            {{ form_row(form.search) }}#}
-{#                                        </div>#}
-
-{#                                        <div class="form-group col-lg-2 col-md-6">#}
-{#                                            {{ form_row(form.type) }}#}
-{#                                        </div>#}
-
-{#                                        <div class="form-group col-lg-2 col-md-6">#}
-{#                                            {{ form_row(form.category) }}#}
-{#                                        </div>#}
-
-{#                                        <div class="form-group col-lg-2 col-md-6" data-controller="city" data-city-searchable-value="true" data-city-placeholder-value="Localisation">#}
-{#                                            {{ form_row(form.city) }}#}
-{#                                        </div>#}
-
-{#                                        <div class="form-group col-xl-1 col-lg-2 col-md-6">#}
-{#                                            <button type="submit" class="btn btn-primary active">Rechercher</button>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                {{ form_end(form, {render_rest: false}) }}#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
             </div>
         </div>
     </div>
@@ -112,6 +70,25 @@
 <section class="popular-deals section bg-gray">
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <p style="text-align: justify" class="alt-color">La Société d’aménagement foncier et d’établissement rural (Safer) permet à tout porteur de projet viable –
+                                qu’il soit agricole, artisanal, de service, résidentiel ou environnemental – de s’installer en milieu rural.
+                                Elle propose donc un certain nombre de biens agricoles à la vente ou à la location à l'intention des porteurs
+                                de projets.
+                                Les biens proposés sont donc à la vente ou à la location. Ils possèdent une surface exprimée en m2 et une
+                                catégorie. Chaque bien possède un prix (vente prix final, dans le location, le prix mensuel) exprimés en
+                                euros, et une localisation (ville et codepostal). Chaque bien possède également un numéro, un titre, ainsi
+                                qu'un descriptif.
+                                Les catégories sont les suivantes : Terrain agricole, prairie, Bois, Bâtiments, Exploitations. Chaque catégorie
+                                peut référencer plusieurs biens.
+                                Les porteurs de projet peuvent consulter le site, et mettre en favoris des biens pour se les faire envoyer par
+                                mail. </p>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12">
                 <div class="section-title">
                     <h2>Biens d'exception</h2>
@@ -148,50 +125,10 @@
                             </div>
                         </div>
                     {% endfor %}
-{#                    {% for property in properties  %}#}
-
-{#                    <div class="col-sm-12 col-lg-4">#}
-{#                        <!-- product card -->#}
-{#                        <div class="product-item bg-light">#}
-{#                            <div class="card">#}
-{#                                <div class="thumb-content">#}
-{#                                    <!-- <div class="price">$200</div> -->#}
-{#                                    <a href="single.html">#}
-{#                                        <img class="card-img-top img-fluid" src="images/products/products-1.jpg"#}
-{#                                             alt="Card image cap">#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                                <div class="card-body">#}
-{#                                    <h4 class="card-title"><a href="single.html">{{ property.title }}</a></h4>#}
-{#                                    <ul class="list-inline product-meta">#}
-{#                                        <li class="list-inline-item">#}
-{#                                            <a href="single.html"><i class="fa fa-folder-open-o"></i>{{ property.getCategory() }}</a>#}
-{#                                        </li>#}
-{#                                        <li class="list-inline-item">#}
-{#                                            <a href="category.html"><i class="fa fa-calendar"></i>{{ property.getUpdatedAt() | date('d-m-Y') }}</a>#}
-{#                                        </li>#}
-{#                                    </ul>#}
-{#                                    <p class="card-text"></p>#}
-{#                                    <div class="product-ratings">#}
-{#                                        <ul class="list-inline">#}
-{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
-{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
-{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
-{#                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>#}
-{#                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>#}
-{#                                        </ul>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-
-
-{#                    </div>#}
-
-{#                    {% endfor %}#}
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
@@ -240,21 +177,5 @@
 =            Call to Action            =
 =====================================-->
 
-<section class="call-to-action overly bg-3 section-sm">
-    <!-- Container Start -->
-    <div class="container position-relative">
-        <div class="row justify-content-md-center text-center">
-            <div class="col-md-8">
-                <div class="content-holder">
-                    <h2>Commencez dès aujourd'hui pour vos opérations immobilières que vous soyiez propriétaire ou en recherche de biens immobiliers. </h2>
-                    <ul class="list-inline mt-30">
-                        <li class="list-inline-item"><a class="btn btn-main" href="ad-listing.html">Ajouter une annonce</a></li>
-                        <li class="list-inline-item"><a class="btn btn-secondary" href="category.html">Liste des navigateurs</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Container End -->
-</section>
+
 {% endblock %}

@@ -40,12 +40,44 @@ class HomeController extends AbstractController
         ]);
 
     }
-    /* ##[Route('/', name: 'app')]
-     public function entit(EntityManagerInterface $entityManager)
-     {
-         $repository = $this->entityManager->getRepository(Property::class);
-             return $this->render('hello/index.html.twig',['properties'=>$properties,
-         ]);
-     }
-     #*/
+
+    #[Route('/about', name: 'about')]
+    public function about(): Response
+    {
+        return $this->render('hello/about.html.twig');
+    }
+
+    #[Route('/annonces', name: 'annonces')]
+    public function annonces(): Response
+    {
+        return $this->render('hello/annonces.html.twig');
+    }
+
+    #[Route('/client', name: 'client')]
+    public function client(): Response
+    {
+        return $this->render('hello/client.html.twig');
+    }
+
+    #[Route('/conditions', name: 'conditions')]
+    public function condition(): Response
+    {
+        return $this->render('hello/condition.html.twig');
+    }
+
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('hello/contact.html.twig');
+
+    }
+
+    #[Route('/politique', name: 'politique')]
+    public function politique(): Response
+    {
+        return $this->render('hello/politique.html.twig');
+    }
+
+
 }

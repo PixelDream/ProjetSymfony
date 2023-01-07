@@ -2,34 +2,32 @@
     <!-- Container Start -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
+            <div style="flex: 0 0 auto;width:50%; text-align: justify;" class=" col-md-7 offset-md-1 offset-lg-0 mb-4 mb-lg-0">
                 <!-- About -->
-                <div class="block about">
                     <!-- description -->
-                    <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua.</p>
-                </div>
+                    <p class="alt-color ">Particulièrement dynamique, le marché de l'immobilier en France constitue un investissement de choix pour ceux qui souhaitent construire un patrimoine durable.
+                        SAFER vous accompagne dans votre processus de recherche de votre prochaine acquisition ou location
+                    immobilière. Que vous soyiez propriétaire désireux de vendre ou à la recherche de biens à louer, nous sauront vous
+                    aider en vous présentant les derniers biens immobiliers correspondant au profil qui vous correspond le mieux. </p>
+            </div>
             </div>
             <!-- Link list -->
             <div class="col-lg-2 offset-lg-1 col-md-3 col-6 mb-4 mb-lg-0">
                 <div class="block">
-                    <h4>Site Pages</h4>
                     <ul>
-                        <li><a href="dashboard-my-ads.html">My Ads</a></li>
-                        <li><a href="dashboard-favourite-ads.html">Favourite Ads</a></li>
-                        <li><a href="dashboard-archived-ads.html">Archived Ads</a></li>
+                        <li><a href="{{ path('annonces') }}">Mes annonces sur SAFER</a></li>
+                        <li><a href="{{ path('contact') }}">Nous contacter</a></li>
+                        <li><a href="{{ path('conditions') }}">Conditions générales</a></li>
                     </ul>
                 </div>
             </div>
             <!-- Link list -->
             <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0 col-6 mb-4 mb-md-0">
                 <div class="block">
-                    <h4>Admin Pages</h4>
                     <ul>
-                        <li><a href="category.html">Category</a></li>
-                        <li><a href="single.html">Single Page</a></li>
-                        <li></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="{{ path('about') }}">A propos de SAFER</a></li>
+                        <li><a href="{{ path('client') }}">Service Client</a></li>
+                        <li><a href="{{ path('politique') }}">Politique de protection des données</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,10 +40,10 @@
     <!-- Container Start -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 text-center text-lg-left mb-3 mb-lg-0">
+            <div style="text-align: center">
                 <!-- Copyright -->
                 <div class="copyright">
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script>.</p>
+                    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> tous droits réservés SAFER</p>
                 </div>
             </div>
             <div class="col-lg-6">

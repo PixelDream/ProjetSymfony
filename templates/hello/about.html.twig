@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+
+    <section class="page-title">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-center">
+                    <!-- Title text -->
+                    <h3>A PROPOS DE SAFER</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-img">
+                        <img src="{{asset('./image/images/about/about.jpg') }}" class="img-fluid w-100 rounded" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5 pt-lg-0">
+                    <div class="about-content">
+                        <h3 class="font-weight-bold">Introduction</h3>
+                        <p>La Société d’aménagement foncier et d’établissement rural (Safer) permet à tout porteur de projet viable –
+                            qu’il soit agricole, artisanal, de service, résidentiel ou environnemental – de s’installer en milieu rural.
+                            Elle propose donc un certain nombre de biens agricoles à la vente ou à la location à l'intention des porteurs
+                            de projets.
+                            Les biens proposés sont donc à la vente ou à la location. Ils possèdent une surface exprimée en m2 et une
+                            catégorie. Chaque bien possède un prix (vente prix final, dans le location, le prix mensuel) exprimés en
+                            euros, et une localisation (ville et codepostal). Chaque bien possède également un numéro, un titre, ainsi
+                            qu'un descriptif.
+                            Les catégories sont les suivantes : Terrain agricole, prairie, Bois, Bâtiments, Exploitations. Chaque catégorie
+                            peut référencer plusieurs biens.
+                            Les porteurs de projet peuvent consulter le site, et mettre en favoris des biens pour se les faire envoyer par
+                            mail. </p>
+                        <h3 class="font-weight-bold">Comment pouvons-nous vous aider?</h3>
+                        <p>Nous accompagnons les propriétaires dans le processus assez complexe de la mise en vente de leurs biens ou meme dans la location dans leurs biens.
+                        Propriétaire, inscrivez vous, nous vous contacterons pour analyser vos offres et nous les ajouterons sur le site. Locataire ou Acheteur, consultez la varité de biens
+                            disponibles et faites votre choix.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading text-center text-capitalize font-weight-bold py-5">
+                        <h2>Notre équipe</h2>
+                    </div>
+                </div>
+                <div style="align-items: center" class="col-lg-3 col-sm-6">
+                    <div class="card my-3 my-lg-0">
+                        <img class="card-img-top" src="{{asset('./image/images/team/team2.jpg') }}" class="img-fluid w-100" alt="Card image cap">
+                        <div class="card-body bg-gray text-center">
+                            <h5 class="card-title">THOO Omonliwi</h5>
+                            <p class="card-text">Founder / CEO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card my-3 my-lg-0">
+                        <img class="card-img-top" src="{{asset('./image/images/team/team1.jpg') }}" class="img-fluid w-100" alt="Card image cap">
+                        <div class="card-body bg-gray text-center">
+                            <h5 class="card-title">NEDHI Morgan</h5>
+                            <p class="card-text">Founder / CEO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="card my-3 my-lg-0">
+                        <img class="card-img-top" src="{{asset('./image/images/team/team3.jpg') }}" class="img-fluid w-100" alt="Card image cap">
+                        <div class="card-body bg-gray text-center">
+                            <h5 class="card-title">Emilie QUIENNE</h5>
+                            <p class="card-text">Founder / CEO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 my-lg-0 my-3">
+                    <div class="counter-content text-center bg-light py-4 rounded">
+                        <i class="fa fa-smile-o d-block"></i>
+                        <span class="counter my-2 d-block" data-count="2314">255</span>
+                        <h5>Clients satisfaits</h5>
+                        </script>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 my-lg-0 my-3">
+                    <div class="counter-content text-center bg-light py-4 rounded">
+                        <i class="fa fa-user-o d-block"></i>
+                        <span class="counter my-2 d-block" data-count="1013">6.000</span>
+                        <h5>Membres actifs</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 my-lg-0 my-3">
+                    <div class="counter-content text-center bg-light py-4 rounded">
+                        <i class="fa fa-bookmark-o d-block"></i>
+                        <span class="counter my-2 d-block" data-count="2413">801.084</span>
+                        <h5>Annonces vérifiées</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 my-lg-0 my-3">
+                    <div class="counter-content text-center bg-light py-4 rounded">
+                        <i class="fa fa-smile-o d-block"></i>
+                        <span class="counter my-2 d-block" data-count="200">1.924.970</span>
+                        <h5>Contrats établis</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
