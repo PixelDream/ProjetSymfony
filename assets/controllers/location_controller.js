@@ -11,7 +11,7 @@ export default class extends Controller {
 
     static values = {placeholder: String, searchable: Boolean};
 
-    $(function()){
+
     /*$.getJSON("https://api-adresse.data.gouv.fr/search/?type=municipality&q=" + value, function(data) {
         $("#autocomplete").autocomplete({
             source: data,
@@ -19,7 +19,7 @@ export default class extends Controller {
                 window.location.href = ui;
             }
         });*/
-}
+
 
 
                 /* for (let i = 0; i < data.features.length; i++) {
