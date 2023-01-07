@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +22,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {
-    }
+    private UserRepository $userRepository;
+    private UrlGeneratorInterface $urlGenerator;
 
+    public function __construct(UrlGeneratorInterface $urlGenerator, UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->urlGenerator = $urlGenerator;
+    }
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -43,10 +48,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
+            $response = new RedirectResponse($targetPath);
+        } else {
+            $response = new RedirectResponse($this->urlGenerator->generate('app'));
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app'));
+        $this->userRepository->copyFavoryCookieToUserFavory($token->getUser(), $request, $response);
+
+        return $response;
     }
 
     protected function getLoginUrl(Request $request): string

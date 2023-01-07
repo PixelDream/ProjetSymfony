@@ -5,31 +5,35 @@
 {% block body %}
     <div class="widget dashboard-container my-adslist">
         <h3 class="widget-header">Mes favoris</h3>
+        {% if favorites|length > 0 %}
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input type="submit" value="Partager" class="btn btn-outline-primary float-right">
+            {{ form_end(form) }}
+        {% endif %}
         <table class="table table-responsive product-dashboard-table">
             <thead>
             <tr>
                 <th>Image</th>
-                <th>Product Title</th>
-                <th class="text-center">Category</th>
+                <th>Bien</th>
                 <th class="text-center">Action</th>
             </tr>
             </thead>
             <tbody>
-                {% for favory in app.user.favorites %}
+                {% for favory in favorites %}
                     <tr>
                         <td class="product-thumb">
-                            <img width="120px" height="auto" src="{{ asset('image/property/' ~ favory.images.first) }}" alt="image description"></td>
+                            <img width="120px" height="auto" src="{{ asset('image/property/' ~ favory.images.first) }}" alt="image bien"></td>
                         <td class="product-details">
                             <h3 class="title">{{ favory.title }}</h3>
                             <span class="add-id"><strong>REF :</strong> {{ favory.reference }}</span>
                             <span class="location"><strong>Localisation : </strong>{{ favory.location }}</span>
                         </td>
-                        <td class="product-category"><span class="categories">Laptops</span></td>
                         <td class="action" data-title="Action">
                             <div class="">
                                 <ul class="list-inline justify-content-center">
                                     <li class="list-inline-item">
-                                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="dashboard-my-ads.html">
+                                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('app_property_delete_favorite', {id: favory.id}) }}">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </li>

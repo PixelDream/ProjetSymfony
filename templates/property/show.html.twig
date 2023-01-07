@@ -87,6 +87,17 @@
                                 <p>{{ property.price }} € / mois</p>
                             {% endif %}
                         </div>
+                        <div class="widget d-flex justify-content-center" data-controller="favorite" data-action="click->favorite#updateCount">
+                            {% if property.id in userFavorites %}
+                                <a class="btn btn-outline-danger" href="{{ path('app_property_toggle_favorite', {id: property.id}) }}">
+                                    Retirer des favoris
+                                </a>
+                            {% else %}
+                                <a class="btn btn-outline-primary" href="{{ path('app_property_toggle_favorite', {id: property.id}) }}">
+                                    Ajouter à mes favoris
+                                </a>
+                            {% endif %}
+                        </div>
                         <div>
                             <table class="table table-bordered product-table">
                                 <h3 class="tab-title">Spécificités</h3>

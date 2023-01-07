@@ -13,7 +13,7 @@ final class SendPropertyEmailMessage
         $this->property = $property;
     }
 
-    public function getProperty() : Property
+    public function getProperty(): Property
     {
         return $this->property;
     }

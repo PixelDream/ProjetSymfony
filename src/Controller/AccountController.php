@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\AccountType;
+use App\Form\SharePropertyType;
+use App\Repository\PropertyRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,10 +38,28 @@ class AccountController extends AbstractController
     }
 
     #[Route('/account/favory', name: 'app_account_favory')]
-    public function favory(): Response
+    public function favory(UserRepository $userRepository, PropertyRepository $propertyRepository, Request $request): Response
     {
+        $favorites = $userRepository->getFavorites($this->getUser(), $request);
+        $favorites = $propertyRepository->findFavorites($favorites);
+
+        // return form SharePropertyType
+        $form = $this->createForm(SharePropertyType::class, null, [
+            'email' => $this->getUser() ? $this->getUser()->getEmail() : null,
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // call share with email property
+            $propertyRepository->share($form->get('email')->getData(), $userRepository->getFavorites($this->getUser(), $request));
+
+            $this->addFlash('success', 'Votre email a bien été envoyé');
+        }
+
         return $this->render('account/favory.html.twig', [
-            'controller_name' => 'AccountController',
+            'favorites' => $favorites,
+            'form' => $form->createView(),
         ]);
     }
 }

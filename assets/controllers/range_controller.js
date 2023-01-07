@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+import {Controller} from '@hotwired/stimulus';
 import noUiSlider from 'nouislider';
 import wNumb from 'wnumb';
 
@@ -14,14 +14,13 @@ export default class extends Controller {
         min: Number,
         max: Number,
         suffix: String,
-        step: Number
+        step: Number,
+        submitId: String
     }
 
     connect() {
         const minValue = Math.floor(parseInt(this.minValue, 10) / this.stepValue) * this.stepValue;
         const maxValue = Math.ceil(parseInt(this.maxValue, 10) / this.stepValue) * this.stepValue;
-
-        console.log(minValue, maxValue);
 
         noUiSlider.create(this.selectTarget, {
             start: [
@@ -42,12 +41,14 @@ export default class extends Controller {
                 'min': minValue,
                 'max': maxValue
             }
-        }).on('slide', (values , handle) => {
+        }).on('slide', (values, handle) => {
             if (handle) {
                 this.maxTarget.value = Math.round(values[handle]);
             } else {
                 this.minTarget.value = Math.round(values[handle]);
             }
+
+            if (this.submitIdValue) document.getElementById(this.submitIdValue).click();
         });
     }
 }

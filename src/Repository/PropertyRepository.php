@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Property;
 use App\Entity\Research;
+use App\Message\SendPropertiesEmailMessage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -12,6 +13,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @extends ServiceEntityRepository<Property>
@@ -24,11 +26,14 @@ use Knp\Component\Pager\PaginatorInterface;
 class PropertyRepository extends ServiceEntityRepository
 {
     private const PAGINATOR_PAGES = 9;
+    private MessageBusInterface $messageBus;
+    private PaginatorInterface $paginator;
 
-    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator, MessageBusInterface $messageBus)
     {
         parent::__construct($registry, Property::class);
         $this->paginator = $paginator;
+        $this->messageBus = $messageBus;
     }
 
     public function save(Property $entity, bool $flush = false): void
@@ -159,5 +164,21 @@ class PropertyRepository extends ServiceEntityRepository
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findFavorites(array $favorites): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id IN (:favorites)')
+            ->setParameter('favorites', $favorites)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function share(string $email, array $favorites):void
+    {
+        //send email with the list of favorites
+        $message = new SendPropertiesEmailMessage($email, $this->findFavorites($favorites));
+        $this->messageBus->dispatch($message);
     }
 }

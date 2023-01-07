@@ -26,10 +26,12 @@
                 <div class="container">
                     <!-- Row Start -->
                     <div class="row">
-                        <div class="col-lg-4">
-                            {% include 'account/_sidebar.html.twig' %}
-                        </div>
-                        <div class="col-lg-8">
+                        {% if app.user %}
+                            <div class="col-lg-4">
+                                {% include 'account/_sidebar.html.twig' %}
+                            </div>
+                        {% endif %}
+                        <div class="col-lg-{{ app.user ? '8' : '12' }}">
                             <!-- Recently Favorited -->
                             {% block body %}{% endblock %}
                         </div>

@@ -76,14 +76,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link add-button" href="{{ path('app_register') }}">Inscription</a>
                                 </li>
-                            {% endif %}
-
-                            {% set favoritesCount = app.request.cookies.get('favorites') ? app.request.cookies.get('favorites')|split(',')|length : 0 %}
-                            {% if favoritesCount > 0 %}
-                            {# show favory using cookies favorites #}
-                                <li class="nav-item mx-3">
-                                    <a class="nav-link add-button" href="{{ path('app_account_favory') }}">{{ favoritesCount }} favory</a>
-                                </li>
+                                {% set favoritesCount = app.request.cookies.get('favorites') ? app.request.cookies.get('favorites')|split(',')|length : 0 %}
+                                {% if favoritesCount > 0 %}
+                                    {# show favory using cookies favorites #}
+                                    {# if  #}
+                                    <li class="nav-item mx-3">
+                                        <a class="nav-link add-button" href="{{ path('app_account_favory') }}">{{ favoritesCount }} favory</a>
+                                    </li>
+                                {% endif %}
                             {% endif %}
                         </ul>
 

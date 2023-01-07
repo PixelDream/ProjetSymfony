@@ -23,12 +23,7 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $response = $this->renderForm('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-
-        // copy all favory cookie to user favory
-        $userRepository->copyFavoryCookieToUserFavory($this->getUser(), $request, $response);
-
-        return $response;
+        return $this->renderForm('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

@@ -39,6 +39,7 @@
     "bootstrap-icons": "^1.10.2",
     "jquery": "^3.6.3",
     "leaflet": "^1.9.3",
+    "nice-select2": "^2.0.0",
     "nouislider": "^15.6.1",
     "snarkdown": "^2.0.0",
     "vicopo": "^1.2.1",

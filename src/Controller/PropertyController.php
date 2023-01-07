@@ -31,7 +31,8 @@ class PropertyController extends AbstractController
         return $this->researchNow($propertyRepository, $categoryRepository, $request, $research);
     }
 
-    public function researchNow(PropertyRepository $propertyRepository, CategoryRepository $categoryRepository, Request $request, Research $research): Response {
+    public function researchNow(PropertyRepository $propertyRepository, CategoryRepository $categoryRepository, Request $request, Research $research): Response
+    {
         $form = $this->createForm(ResearchType::class, $research, [
             'choice_mapper' => $research->getCity(),
             'category_mapper' => $categoryRepository->findAll(),
@@ -82,5 +83,18 @@ class PropertyController extends AbstractController
         return $response;
     }
 
+    #[Route('/{id}/favorite', name: 'app_property_delete_favorite')]
+    public function deleteFavorite(Property $property, Request $request, UserRepository $userRepository): Response
+    {
+        if (count($userRepository->getFavorites($this->getUser(), $request)) == 1) {
+            $response = $this->redirectToRoute('app');
+            $this->addFlash('warning', 'Vous n\'avez plus de favoris');
+        } else {
+            $response = $this->redirectToRoute('app_account_favory');
+        }
 
+        $userRepository->togglePropertyFavorite($this->getUser(), $property, $request, $response);
+
+        return $response;
+    }
 }
