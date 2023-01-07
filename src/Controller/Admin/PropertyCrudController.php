@@ -70,6 +70,12 @@ class PropertyCrudController extends AbstractCrudController
             ->setNumDecimals(0)
             ->setCurrency('EUR')
             ->setColumns(6);
+        yield AssociationField::new('author', label: 'Auteur')
+            ->setColumns(6)
+            ->setQueryBuilder(function ($queryBuilder) {
+                return $queryBuilder->select('u') ->from('App\Entity\User', 'u') ->where('u.roles LIKE :roles') ->setParameter('roles', '%"'."ROLE_ADMIN".'"%'); // your query
+
+            });
         yield AssociationField::new('images', label: 'Photos')->onlyOnIndex();
         yield CollectionField::new('images', label: 'Photos')
             ->setEntryType(ImageType::class)
@@ -79,9 +85,8 @@ class PropertyCrudController extends AbstractCrudController
             ->setFormTypeOption('propertyFile', 'imageFile')
             ->setTemplatePath('admin/fields/images.html.twig')
             ->onlyOnDetail();
-        yield AssociationField::new('author', label : 'Auteur')
-            ->setColumns(6)
-            ->autocomplete();
+
+
 //        yield ChoiceField::new('city', 'Ville')
 //            ->setVirtual(true)
 //            ->hideOnIndex()
@@ -120,7 +125,7 @@ class PropertyCrudController extends AbstractCrudController
             ->add('index', 'detail');
     }
 
-    public function createEntity(string $entityFqcn)
+    public function createEntity(string $entityFqcn): Property
     {
         $property = new Property();
         $property->setAuthor($this->getUser());

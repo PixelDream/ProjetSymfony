@@ -13,9 +13,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -48,9 +52,10 @@ class UserCrudController extends AbstractCrudController
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('firstName', label: 'Prénom')->setColumns(6);
         yield TextField::new('lastName', label: 'Nom')->setColumns(6);
-        yield TextField::new('email', label: 'Email')->setColumns(6);
+        yield TelephoneField::new('phone', label: 'Téléphone')->setColumns(6);
+        yield EmailField::new('email', label: 'Email')->setColumns(6);
         yield TextField::new('password', label: 'Mot de passe')->setColumns(6)->setFormType(PasswordType::class)->hideOnIndex()->setEmptyData("")->setValue("")->setRequired(false);
-        yield ChoiceField::new('roles', label: 'Roles')->allowMultipleChoices()->setChoices(static fn (?User $user): array => $user->getRolesChoices())->setColumns(6);
+        yield ChoiceField::new('roles', label: 'Roles')->allowMultipleChoices()->setChoices(static fn(?User $user): array => $user->getRolesChoices())->setColumns(6);
         yield BooleanField::new('isVerified', label: 'Email valide')->setColumns(6)->hideOnIndex();
     }
 
