@@ -50,7 +50,7 @@ class HomeController extends AbstractController
     #[Route('/annonces', name: 'annonces')]
     public function annonces(): Response
     {
-        return $this->render('hello/annonces.html.twig');
+        return $this->render('hello/annonce.html.twig');
     }
 
     #[Route('/client', name: 'client')]
