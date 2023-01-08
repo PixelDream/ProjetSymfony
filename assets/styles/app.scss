@@ -8,3 +8,7 @@ $theme-colors: (
 @import '~bootstrap-icons/font/bootstrap-icons';
 
 @import "scss/style";
+
+.bg-success {
+    background-color: #86a20b !important;
+}
