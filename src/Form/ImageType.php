@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class ImageType extends AbstractType
 {
@@ -23,8 +22,7 @@ class ImageType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Choisir une image',
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -37,18 +37,6 @@ class Category
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Property>
      */
@@ -57,6 +45,11 @@ class Category
         return $this->properties;
     }
 
+    /**
+     * Ajoute une propriété à la catégorie
+     * @param Property $property
+     * @return $this
+     */
     public function addProperty(Property $property): self
     {
         if (!$this->properties->contains($property)) {
@@ -67,6 +60,11 @@ class Category
         return $this;
     }
 
+    /**
+     * Supprime une propriété de la catégorie
+     * @param Property $property
+     * @return $this
+     */
     public function removeProperty(Property $property): self
     {
         if ($this->properties->removeElement($property)) {
@@ -84,7 +82,20 @@ class Category
         return $this->getName();
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     /**
+     * Récupère les recherches de la catégorie
      * @return Collection<int, Research>
      */
     public function getResearch(): Collection
@@ -92,6 +103,11 @@ class Category
         return $this->research;
     }
 
+    /**
+     * Ajoute une recherche à la catégorie
+     * @param Research $research
+     * @return $this
+     */
     public function addResearch(Research $research): self
     {
         if (!$this->research->contains($research)) {
@@ -102,6 +118,11 @@ class Category
         return $this;
     }
 
+    /**
+     * Supprime une recherche de la catégorie
+     * @param Research $research
+     * @return $this
+     */
     public function removeResearch(Research $research): self
     {
         if ($this->research->removeElement($research)) {

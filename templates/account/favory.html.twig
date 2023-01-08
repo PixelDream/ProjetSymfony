@@ -33,8 +33,17 @@
                             <div class="">
                                 <ul class="list-inline justify-content-center">
                                     <li class="list-inline-item">
-                                        <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('app_property_delete_favorite', {id: favory.id}) }}">
-                                            <i class="bi bi-trash"></i>
+                                        {% if app.user %}
+                                            <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('app_property_delete_favorite', {id: favory.id}) }}">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        {% else %}
+                                            <a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="{{ path('app_property_delete_favorite', {id: favory.id}) }}">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        {% endif %}
+                                        <a data-toggle="tooltip" data-placement="top" title="View" class="view" href="{{ path('app_property_show', {id: favory.id}) }}">
+                                            <i class="bi bi-eye"></i>
                                         </a>
                                     </li>
                                 </ul>

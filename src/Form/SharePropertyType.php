@@ -20,8 +20,7 @@ class SharePropertyType extends AbstractType
                 ],
                 'required' => true,
                 'mapped' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

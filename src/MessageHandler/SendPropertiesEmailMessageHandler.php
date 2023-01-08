@@ -3,10 +3,9 @@
 namespace App\MessageHandler;
 
 use App\Message\SendPropertiesEmailMessage;
-use App\Message\SendPropertyEmailMessage;
-use App\Repository\ResearchRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Mime\Address;
@@ -22,6 +21,12 @@ final class SendPropertiesEmailMessageHandler implements MessageHandlerInterface
         $this->logger = $logger;
     }
 
+    /**
+     * Send an email to the user with the properties he has saved.
+     * @param SendPropertiesEmailMessage $message
+     * @return void
+     * @throws TransportExceptionInterface
+     */
     public function __invoke(SendPropertiesEmailMessage $message)
     {
         $properties = $message->getProperties();

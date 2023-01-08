@@ -44,36 +44,12 @@ class ResearchRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Research[] Returns an array of Research objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Research
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
     /**
+     * Filter properties by research
      * @param Property $property
      * @return array<Research>
      */
-    public function findBySameProperty(Property $property) : array
+    public function findBySameProperty(Property $property): array
     {
         $query = $this->createQueryBuilder('r');
 

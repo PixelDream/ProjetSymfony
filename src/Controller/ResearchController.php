@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Research;
 use App\Form\ContactResearchType;
-use App\Form\ResearchType;
 use App\Repository\CategoryRepository;
 use App\Repository\ResearchRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +26,9 @@ class ResearchController extends AbstractController
         $research = $researchRepository->findOneBy(['token' => $token]);
         $researchRepository->remove($research, true);
 
-        return $this->render('research/delete.html.twig');
+        $this->addFlash('success', 'Votre recherche a bien été supprimée');
+
+        return $this->redirectToRoute('app');
     }
 
     /**

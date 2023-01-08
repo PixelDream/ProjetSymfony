@@ -39,25 +39,6 @@ class Image
     }
 
     /**
-     * @return string|null
-     */
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    /**
-     * @param string|null $imageName
-     * @return $this
-     */
-    public function setImageName(?string $imageName): self
-    {
-        $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    /**
      * @return Property|null
      */
     public function getProperty(): ?Property
@@ -82,6 +63,25 @@ class Image
     public function __toString(): string
     {
         return $this->getImageName();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * @param string|null $imageName
+     * @return $this
+     */
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 
     /**

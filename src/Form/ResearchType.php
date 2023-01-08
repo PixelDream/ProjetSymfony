@@ -26,7 +26,6 @@ class ResearchType extends AbstractType
                     'class' => 'form-control my-2 my-lg-0',
                 ]
             ])
-
             ->add('city', null, [
                 'required' => false,
                 'attr' => [
@@ -100,8 +99,7 @@ class ResearchType extends AbstractType
                 'attr' => [
                     'data-range-target' => 'row',
                 ]
-            ])
-        ;
+            ]);
     }
 
 

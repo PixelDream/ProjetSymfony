@@ -10,7 +10,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * Page d'accueil de l'admin
+ * Class DashboardController
+ * @package App\Controller\Admin
+ */
 class DashboardController extends AbstractDashboardController
 {
 
@@ -27,6 +31,8 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig', [
             'user_count' => $this->stats->getUsersCount(),
             'property_count' => $this->stats->getPropertiesCount(),
+            'favories_categories' => $this->stats->getFavoriesCategories(),
+            'favorites_department' => $this->stats->getPropertiesByDepartment(),
         ]);
     }
 
@@ -50,6 +56,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Catégories', 'fas fa-tags', CategoryCrudController::getEntityFqcn());
         yield MenuItem::linkToRoute('Favoris', 'fas fa-heart', 'app_favory_index');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', UserCrudController::getEntityFqcn());
-
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PropertyRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -54,10 +56,10 @@ class Property
     private Collection $images;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $created_at = null;
+    private ?DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $updated_at = null;
+    private ?DateTimeInterface $updated_at = null;
 
     /**
      * @var array|null
@@ -83,11 +85,18 @@ class Property
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -95,11 +104,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -107,35 +123,18 @@ class Property
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?int
-    {
-        return $this->ZipCode;
-    }
-
-    public function setZipCode(int $ZipCode): self
-    {
-        $this->ZipCode = $ZipCode;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getReference(): ?string
     {
         return $this->reference;
     }
 
+    /**
+     * @param string $reference
+     * @return $this
+     */
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
@@ -143,11 +142,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * @param string $type
+     * @return $this
+     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -155,11 +161,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getSurface(): ?float
     {
         return $this->surface;
     }
 
+    /**
+     * @param float $surface
+     * @return $this
+     */
     public function setSurface(float $surface): self
     {
         $this->surface = $surface;
@@ -167,11 +180,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return category|null
+     */
     public function getCategory(): ?category
     {
         return $this->category;
     }
 
+    /**
+     * @param category|null $category
+     * @return $this
+     */
     public function setCategory(?category $category): self
     {
         $this->category = $category;
@@ -187,6 +207,10 @@ class Property
         return $this->users;
     }
 
+    /**
+     * @param User $user
+     * @return $this
+     */
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
@@ -197,6 +221,10 @@ class Property
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return $this
+     */
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
@@ -206,11 +234,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPrice(): ?string
     {
         return $this->price;
     }
 
+    /**
+     * @param string|null $price
+     * @return $this
+     */
     public function setPrice(?string $price): self
     {
         $this->price = $price;
@@ -226,6 +261,10 @@ class Property
         return $this->images;
     }
 
+    /**
+     * @param Image $image
+     * @return $this
+     */
     public function addImage(Image $image): self
     {
         if (!$this->images->contains($image)) {
@@ -236,6 +275,10 @@ class Property
         return $this;
     }
 
+    /**
+     * @param Image $image
+     * @return $this
+     */
     public function removeImage(Image $image): self
     {
         if ($this->images->removeElement($image)) {
@@ -248,16 +291,26 @@ class Property
         return $this;
     }
 
+    /**
+     * @return array|null
+     */
     public function getImageFile(): ?array
     {
         return $this->imageFile;
     }
 
+    /**
+     * @param $imageFile
+     * @return void
+     */
     public function setImageFile($imageFile): void
     {
         $this->imageFile = $imageFile;
     }
 
+    /**
+     * @return void
+     */
     public function clearImageFile(): void
     {
         $this->imageFile = null;
@@ -273,33 +326,17 @@ class Property
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @param \DateTimeInterface|null $created_at
-     */
-    public function setCreatedAt(?\DateTimeInterface $created_at): void
-    {
-        $this->created_at = $created_at;
-    }
-
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updated_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $updated_at
+     * @param DateTimeInterface|null $updated_at
      */
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): void
+    public function setUpdatedAt(?DateTimeInterface $updated_at): void
     {
         $this->updated_at = $updated_at;
     }
@@ -308,10 +345,26 @@ class Property
     #[ORM\PreUpdate]
     public function updatedTimestamps(): void
     {
-        $this->setUpdatedAt(new \DateTime('now'));
+        $this->setUpdatedAt(new DateTime('now'));
         if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTime('now'));
+            $this->setCreatedAt(new DateTime('now'));
         }
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param DateTimeInterface|null $created_at
+     */
+    public function setCreatedAt(?DateTimeInterface $created_at): void
+    {
+        $this->created_at = $created_at;
     }
 
     public function getLocation(): ?Location
@@ -319,6 +372,13 @@ class Property
         return $this->location;
     }
 
+    /**
+     * This function sets the location of the user
+     *
+     * @param location The location of the event.
+     *
+     * @return self The location object.
+     */
     public function setLocation(?Location $location): self
     {
         $this->location = $location;
@@ -341,5 +401,43 @@ class Property
     public function location(): string
     {
         return $this->getCity() . ' ' . $this->getZipCode();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     * @return $this
+     */
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getZipCode(): ?int
+    {
+        return $this->ZipCode;
+    }
+
+    /**
+     * @param int $ZipCode
+     * @return $this
+     */
+    public function setZipCode(int $ZipCode): self
+    {
+        $this->ZipCode = $ZipCode;
+
+        return $this;
     }
 }

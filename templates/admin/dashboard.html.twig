@@ -23,50 +23,29 @@
                     <span class="count-name">Biens</span>
                 </div>
             </a>
-
-{#            <div class="col-md-3">#}
-{#                <div class="card-counter primary">#}
-{#                    <i class="fa fa-code-fork"></i>#}
-{#                    <span class="count-numbers">0</span>#}
-{#                    <span class="count-name">X</span>#}
-{#                </div>#}
-{#            </div>#}
-
-{#            <div class="col-md-3">#}
-{#                <div class="card-counter danger">#}
-{#                    <i class="fa fa-ticket"></i>#}
-{#                    <span class="count-numbers">0</span>#}
-{#                    <span class="count-name">X</span>#}
-{#                </div>#}
-{#            </div>#}
         </div>
-
         <div class="row">
             <div class="card mt-5 col-lg-6 mx-1">
                 <div class="card-body">
                     <h5 class="card-title">Les meillieurs biens par catégorie</h5>
-                    <input type="date" value="2023-01-08">
+                    <input type="date" value="{{ "now"|date("Y-m-d") }}">
                     <hr>
-                    <p>Prairie (1 bien en favori) - <a href="#">Prairies orientées nord ouest</a></p>
-                    <p>Bois (1 bien en favori) - <a href="#">Terrain classé T4</a></p>
-                    <p>Terrain agricole (2 biens en favori) - <a href="#">Vallons du Voironnais</a></p>
-                    <p>Exploitations (2 biens en favori) - <a href="#">Propriété Gard</a></p>
-                    <p>Batiments (3 biens en favori) - <a href="#">Propriété Lozère</a></p>
+                    {% for favorite in favories_categories %}
+                        <p><em>{{ favorite.c }}</em> ({{ favorite.num_properties }} bien en favori)</p>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="card mt-5 col-lg-6 mx-1">
                 <div class="card-body">
                     <h5 class="card-title">Les meillieurs biens par département</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Journalier (4)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Journalier ({{ favorites_department|length }})</h6>
                     <hr>
-                    <p>Cahuzac-sur-Vère (81) - <a href="#">Prairies sur les plateaux</a></p>
-                    <p>Plougasnou (29) - <a href="#">Ancienne ferme équestre en ruine</a></p>
-                    <p>Sainte-Menehould (88) - <a href="#">Propriété Meuse</a></p>
-                    <p>Lagor (64) - <a href="#">Productions végétales</a></p>
+                    {% for favorite in favorites_department %}
+                        <p><em>Département {{ favorite.DEP }}</em> - {{ favorite.title }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

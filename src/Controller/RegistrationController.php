@@ -26,6 +26,13 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * Inscription d'un utilisateur
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -53,8 +60,8 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('security/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
 
+            // do anything else you need here, like send an email
             return $this->redirectToRoute('app');
         }
 
@@ -65,6 +72,13 @@ class RegistrationController extends AbstractController
         ], $response);
     }
 
+    /**
+     * Confirmation de l'inscription d'un utilisateur
+     * @param Request $request
+     * @param TranslatorInterface $translator
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {

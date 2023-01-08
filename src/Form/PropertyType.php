@@ -21,8 +21,7 @@ class PropertyType extends AbstractType
             ->add('surface')
             ->add('price')
             ->add('category')
-            ->add('favoritesUsers')
-        ;
+            ->add('favoritesUsers');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

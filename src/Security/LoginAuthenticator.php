@@ -30,6 +30,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         $this->userRepository = $userRepository;
         $this->urlGenerator = $urlGenerator;
     }
+
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');

@@ -52,7 +52,7 @@
                                     {# show favory using cookies favorites #}
                                     {# if  #}
                                     <li class="nav-item mx-3">
-                                        <a class="nav-link add-button" href="{{ path('app_favory') }}">{{ favoritesCount }} favory</a>
+                                        <a class="nav-link add-button" href="{{ path('app_favory') }}">{{ favoritesCount }} favori{{ favoritesCount > 1 ? 's' }}</a>
                                     </li>
                                 {% endif %}
                             {% endif %}

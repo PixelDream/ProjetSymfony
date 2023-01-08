@@ -19,6 +19,12 @@ class AccountType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
+            ->add('phone', null, [
+                'label' => 'Téléphone',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('lastName', null, [
                 'label' => 'Nom',
                 'attr' => [
@@ -37,8 +43,7 @@ class AccountType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

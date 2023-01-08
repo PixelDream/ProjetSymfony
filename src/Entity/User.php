@@ -219,6 +219,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->createProperties;
     }
 
+    /**
+     * > This function adds a property to the createProperties collection if it doesn't already exist
+     *
+     * @param property $createProperty createProperty The property object that we want to add to the author.
+     *
+     * @return self The author object.
+     */
     public function addCreateProperty(property $createProperty): self
     {
         if (!$this->createProperties->contains($createProperty)) {
@@ -229,6 +236,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * The function removes a property from the createProperties collection
+     *
+     * @param property $createProperty createProperty The property object that you want to remove from the collection.
+     *
+     * @return self The user is being returned.
+     */
     public function removeCreateProperty(property $createProperty): self
     {
         if ($this->createProperties->removeElement($createProperty)) {
@@ -241,14 +255,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function fullName(): string
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-
     public function __toString(): string
     {
         return $this->fullName();
+    }
+
+    public function fullName(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
 

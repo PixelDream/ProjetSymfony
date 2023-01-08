@@ -19,6 +19,10 @@ class AppFixtures extends Fixture
         $this->passwordHasher = $passwordHasher;
     }
 
+    /**
+     * Génération des fixtures pour les tests et environnement de dev
+     * @inheritDoc
+     */
     public function load(ObjectManager $manager): void
     {
         $dataSet = [
@@ -367,6 +371,7 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
+        // Créer un utilisateur avec le rôle admin
         $admin = new User();
         $admin->setEmail('admin@safer.com');
         $admin->setFirstName('John Admin');
@@ -380,7 +385,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
+        // Créer les catégories du dataFixtures
         $categories = [];
 
         foreach ($dataSet as $data) {
@@ -401,7 +406,6 @@ class AppFixtures extends Fixture
 
             $category = $manager->getRepository(Category::class)->findOneBy(['name' => $data['Categorie']]);
 
-
             $image = new Image();
 
             // Vérifier que le fichier existe dans le dossier public/image/property
@@ -413,9 +417,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($image);
 
-
-
-
+            // Créer un objet de type Property
             $property = new Property();
             $property->setReference($data['Reference']);
             $property->setTitle($data['Intitule']);

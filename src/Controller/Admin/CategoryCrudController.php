@@ -8,6 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * CRUD d'administration pour les catégories
+ * Class CategoryCrudController
+ * @package App\Controller\Admin
+ */
 class CategoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string

@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\PropertyRepository;
 use App\Repository\ResearchRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
@@ -11,8 +11,6 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: ResearchRepository::class)]
 class Research
 {
-
-
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,10 +43,10 @@ class Research
     private ?string $priceMax = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
@@ -56,16 +54,13 @@ class Research
     #[ORM\ManyToOne(inversedBy: 'research')]
     private ?Category $category = null;
 
-//    #[ORM\Column(type: 'uuid', unique: true)]
-//    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-//    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
     #[ORM\Column(type: 'uuid', unique: true)]
     private ?Uuid $token = null;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
         $this->token = Uuid::v6();
     }
 
@@ -158,24 +153,24 @@ class Research
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 

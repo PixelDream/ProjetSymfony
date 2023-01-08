@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use function get_class;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -28,15 +29,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
-    }
-
-    public function save(User $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
     }
 
     public function remove(User $entity, bool $flush = false): void
@@ -54,7 +46,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
 
         $user->setPassword($newHashedPassword);
@@ -62,6 +54,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function save(User $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @param string $userID
+     * @param Property $property
+     * @return void
+     */
     public function addPropertyFavorite(string $userID, Property $property): void
     {
         $user = $this->find($userID);
@@ -73,39 +79,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
-    // store in browser cookies passing $request, $key and $value (array)
-    private function generateCookie(Request $request, string $key, int $value): Cookie
-    {
-        $cookie = $request->cookies->get($key);
-
-        if ($cookie) {
-            $cookie = json_decode($cookie, true);
-            $cookie = array_flip($cookie);
-
-            if (array_key_exists($value, $cookie)) {
-                unset($cookie[$value]);
-            } else {
-                $cookie[$value] = $value;
-            }
-
-            $cookie = array_flip($cookie);
-        } else {
-            $cookie = [$value];
-        }
-
-        return new Cookie($key, json_encode($cookie), time() + 3600 * 24 * 30, '/', null, true, false);
-    }
-
-    // get from browser cookies passing $request and $key return array
-    private function getFromCookies(Request $request, string $key): array
-    {
-        $cookie = $request->cookies->get($key);
-
-        if (!$cookie) return [];
-
-        return json_decode($cookie, true);
-    }
-
+    /**
+     * Toggle favorite property in cookies or database
+     * @param UserInterface|null $user
+     * @param Property $property
+     * @param Request $request
+     * @param RedirectResponse $response
+     * @return void
+     */
     public function togglePropertyFavorite(?UserInterface $user, Property $property, Request $request, RedirectResponse $response): void
     {
         if ($user) {
@@ -131,19 +112,74 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
+    /**
+     * Get favorite properties from cookies or database
+     * @param UserInterface|null $user
+     * @param Request $request
+     * @return array
+     */
     public function getFavorites(?UserInterface $user, Request $request): array
     {
         if ($user instanceof User) {
-            return $user->getFavorites()->map(fn (Property $property) => $property->getId())->toArray();
+            return $user->getFavorites()->map(fn(Property $property) => $property->getId())->toArray();
         } else {
             $cookie = $this->getFromCookies($request, 'favorites');
 
             return $cookie;
         }
-
-        return [];
     }
 
+    /**
+     * get from browser cookies passing $request and $key return array
+     * @param Request $request
+     * @param string $key
+     * @return array
+     */
+    private function getFromCookies(Request $request, string $key): array
+    {
+        $cookie = $request->cookies->get($key);
+
+        if (!$cookie) return [];
+
+        return json_decode($cookie, true);
+    }
+
+    /**
+     * store in browser cookies passing $request, $key and $value (array)
+     * @param Request $request
+     * @param string $key
+     * @param int $value
+     * @return Cookie
+     */
+    private function generateCookie(Request $request, string $key, int $value): Cookie
+    {
+        $cookie = $request->cookies->get($key);
+
+        if ($cookie) {
+            $cookie = json_decode($cookie, true);
+            $cookie = array_flip($cookie);
+
+            if (array_key_exists($value, $cookie)) {
+                unset($cookie[$value]);
+            } else {
+                $cookie[$value] = $value;
+            }
+
+            $cookie = array_flip($cookie);
+        } else {
+            $cookie = [$value];
+        }
+
+        return new Cookie($key, json_encode($cookie), time() + 3600 * 24 * 30, '/', null, true, false);
+    }
+
+    /**
+     * Get favorite properties from cookies and pass them to database
+     * @param UserInterface|null $getUser
+     * @param Request $request
+     * @param Response $response
+     * @return void
+     */
     public function copyFavoryCookieToUserFavory(?UserInterface $getUser, Request $request, Response $response)
     {
         if ($getUser instanceof User) {

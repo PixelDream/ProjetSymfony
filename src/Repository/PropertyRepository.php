@@ -6,9 +6,6 @@ use App\Entity\Property;
 use App\Entity\Research;
 use App\Message\SendPropertiesEmailMessage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -54,6 +51,11 @@ class PropertyRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Paginate all properties depending on the research.
+     * @param Research $research
+     * @return PaginationInterface
+     */
     public function findAllVisibleQuery(Research $research): PaginationInterface
     {
         $query = $this->createQueryBuilder('p');
@@ -68,26 +70,10 @@ class PropertyRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Research $research
-     * @param string $field
-     * @return int[]
-     */
-    public function findMinMax(Research $research, string $field): array
-    {
-        $query = $this->createQueryBuilder('p');
-
-        $query = $this->filter($research, $query, true);
-
-        $result = $query->select("MIN(p.$field) as min, MAX(p.$field) as max")
-            ->getQuery()
-            ->getScalarResult();
-
-        return [(int) $result[0]['min'], (int) $result[0]['max']];
-    }
-
-    /**
+     *  Filter research and return query
      * @param Research $research
      * @param QueryBuilder $query
+     * @param bool $ignoreRanges
      * @return QueryBuilder
      */
     public function filter(Research $research, QueryBuilder $query, bool $ignoreRanges = false): QueryBuilder
@@ -148,7 +134,30 @@ class PropertyRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function findTypeCount() : array
+    /**
+     * Find min and max price for field passed in args
+     * @param Research $research
+     * @param string $field
+     * @return int[]
+     */
+    public function findMinMax(Research $research, string $field): array
+    {
+        $query = $this->createQueryBuilder('p');
+
+        $query = $this->filter($research, $query, true);
+
+        $result = $query->select("MIN(p.$field) as min, MAX(p.$field) as max")
+            ->getQuery()
+            ->getScalarResult();
+
+        return [(int)$result[0]['min'], (int)$result[0]['max']];
+    }
+
+    /**
+     * Find count of type of property
+     * @return array
+     */
+    public function findTypeCount(): array
     {
         return $this->createQueryBuilder('p')
             ->select("COUNT(p.type) as count, p.type")
@@ -157,6 +166,10 @@ class PropertyRepository extends ServiceEntityRepository
             ->getScalarResult();
     }
 
+    /**
+     * Get three random properties
+     * @return float|int|mixed|string
+     */
     public function findThreeRandom()
     {
         return $this->createQueryBuilder('p')
@@ -166,6 +179,24 @@ class PropertyRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Share properties by email
+     * @param string $email
+     * @param array $favorites
+     * @return void
+     */
+    public function share(string $email, array $favorites): void
+    {
+        //send email with the list of favorites
+        $message = new SendPropertiesEmailMessage($email, $this->findFavorites($favorites));
+        $this->messageBus->dispatch($message);
+    }
+
+    /**
+     * find all properties passed in parameter
+     * @param array $favorites
+     * @return array
+     */
     public function findFavorites(array $favorites): array
     {
         return $this->createQueryBuilder('p')
@@ -173,12 +204,5 @@ class PropertyRepository extends ServiceEntityRepository
             ->setParameter('favorites', $favorites)
             ->getQuery()
             ->getResult();
-    }
-
-    public function share(string $email, array $favorites):void
-    {
-        //send email with the list of favorites
-        $message = new SendPropertiesEmailMessage($email, $this->findFavorites($favorites));
-        $this->messageBus->dispatch($message);
     }
 }

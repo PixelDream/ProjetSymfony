@@ -35,11 +35,18 @@ class Location
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLatitude(): ?string
     {
         return $this->latitude;
     }
 
+    /**
+     * @param string $latitude
+     * @return $this
+     */
     public function setLatitude(string $latitude): self
     {
         $this->latitude = $latitude;
@@ -47,11 +54,18 @@ class Location
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLongitude(): ?string
     {
         return $this->longitude;
     }
 
+    /**
+     * @param string $longitude
+     * @return $this
+     */
     public function setLongitude(string $longitude): self
     {
         $this->longitude = $longitude;
@@ -67,6 +81,10 @@ class Location
         return $this->properties;
     }
 
+    /**
+     * @param property $property
+     * @return $this
+     */
     public function addProperty(property $property): self
     {
         if (!$this->properties->contains($property)) {
@@ -77,6 +95,10 @@ class Location
         return $this;
     }
 
+    /**
+     * @param property $property
+     * @return $this
+     */
     public function removeProperty(property $property): self
     {
         if ($this->properties->removeElement($property)) {

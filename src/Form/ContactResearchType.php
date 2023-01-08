@@ -93,8 +93,7 @@ class ContactResearchType extends AbstractType
                 ],
                 'choice_label' => 'name',
                 'choices' => $categoryMapper
-            ])
-        ;
+            ]);
     }
 
 

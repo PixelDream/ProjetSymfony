@@ -26,6 +26,9 @@ final class SendPropertyEmailMessageHandler implements MessageHandlerInterface
     }
 
     /**
+     * Send an email to the user with the properties he has saved.
+     * @param SendPropertyEmailMessage $message
+     * @return void
      * @throws TransportExceptionInterface
      */
     public function __invoke(SendPropertyEmailMessage $message)

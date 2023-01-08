@@ -22,11 +22,18 @@ class Favory
         return $this->id;
     }
 
+    /**
+     * @return Property|null
+     */
     public function getProperty(): ?Property
     {
         return $this->property;
     }
 
+    /**
+     * @param Property|null $property
+     * @return $this
+     */
     public function setProperty(?Property $property): self
     {
         $this->property = $property;

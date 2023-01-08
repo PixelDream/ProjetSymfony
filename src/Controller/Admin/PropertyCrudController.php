@@ -2,26 +2,27 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\Fields\AutoCompleteField;
 use App\Entity\Property;
-use App\Entity\User;
 use App\Form\ImageType;
 use App\Message\SendPropertyEmailMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+/**
+ * CRUD d'administration pour les biens
+ * Class PropertyCrudController
+ * @package App\Controller\Admin
+ */
 class PropertyCrudController extends AbstractCrudController
 {
     private MessageBusInterface $messageBus;
@@ -73,7 +74,7 @@ class PropertyCrudController extends AbstractCrudController
         yield AssociationField::new('author', label: 'Auteur')
             ->setColumns(6)
             ->setQueryBuilder(function ($queryBuilder) {
-                return $queryBuilder->select('u') ->from('App\Entity\User', 'u') ->where('u.roles LIKE :roles') ->setParameter('roles', '%"'."ROLE_ADMIN".'"%'); // your query
+                return $queryBuilder->select('u')->from('App\Entity\User', 'u')->where('u.roles LIKE :roles')->setParameter('roles', '%"' . "ROLE_ADMIN" . '"%'); // your query
 
             });
         yield AssociationField::new('images', label: 'Photos')->onlyOnIndex();
