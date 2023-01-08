@@ -73,15 +73,31 @@ class PropertyController extends AbstractController
     }
 
     // toggle favorite with the same schematics as favorite
-    #[Route('/{id}/toggle-favorite', name: 'app_property_toggle_favorite')]
-    public function toggleFavorite(Property $property, Request $request, UserRepository $userRepository): Response
+    #[Route('/{id}/add', name: 'app_property_add_favorite')]
+    public function addFavorite(Property $property, Request $request, UserRepository $userRepository): Response
     {
         $response = $this->redirectToRoute('app_property_show', ['id' => $property->getId()]);
 
         $userRepository->togglePropertyFavorite($this->getUser(), $property, $request, $response);
 
+        $this->addFlash('success', 'La propriété a bien été ajoutée aux favoris');
+
         return $response;
     }
+
+    #[Route('/{id}/remove', name: 'app_property_remove_favorite')]
+    public function removeFavorite(Property $property, Request $request, UserRepository $userRepository): Response
+    {
+        $response = $this->redirectToRoute('app_property_show', ['id' => $property->getId()]);
+
+        $userRepository->togglePropertyFavorite($this->getUser(), $property, $request, $response);
+
+        $this->addFlash('success', 'La propriété a bien été retirée des favoris');
+
+        return $response;
+    }
+
+
 
     #[Route('/{id}/favorite', name: 'app_property_delete_favorite')]
     public function deleteFavorite(Property $property, Request $request, UserRepository $userRepository): Response

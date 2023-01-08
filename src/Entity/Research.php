@@ -56,10 +56,18 @@ class Research
     #[ORM\ManyToOne(inversedBy: 'research')]
     private ?Category $category = null;
 
+//    #[ORM\Column(type: 'uuid', unique: true)]
+//    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+//    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
     #[ORM\Column(type: 'uuid', unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
     private ?Uuid $token = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->token = Uuid::v6();
+    }
 
     public function getId(): ?int
     {

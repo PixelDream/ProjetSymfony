@@ -1,5 +1,5 @@
 import {Controller} from '@hotwired/stimulus';
-//import NiceSelect from "nice-select2/dist/js/nice-select2";
+import NiceSelect from "nice-select2/dist/js/nice-select2";
 
 export default class extends Controller {
 
@@ -9,7 +9,7 @@ export default class extends Controller {
 
     niceSelector = null;
 
-  /*  connect() {
+  connect() {
         this.loadNiceSelect();
 
         const span = this.element.getElementsByTagName('span')[0];
@@ -44,12 +44,12 @@ export default class extends Controller {
                 this.niceSelector.update();
             });
         });
-    }*/
+    }
 
-    /*loadNiceSelect() {
+    loadNiceSelect() {
         this.niceSelector = new NiceSelect(this.inputTarget, {
             placeholder: this.placeholderValue,
             searchable: this.searchableValue
         });
-    }*/
+    }
 }

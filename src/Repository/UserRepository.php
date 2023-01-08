@@ -164,5 +164,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
+    // all users if has favorites
+    public function findAllWithFavory(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.favorites IS NOT EMPTY')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }

@@ -258,6 +258,12 @@ class Property
         $this->imageFile = $imageFile;
     }
 
+    public function clearImageFile(): void
+    {
+        $this->imageFile = null;
+        $this->images = new ArrayCollection();
+    }
+
     /**
      * @return Collection
      */

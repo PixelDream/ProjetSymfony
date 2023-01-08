@@ -37,6 +37,7 @@ class AccountController extends AbstractController
         ]);
     }
 
+    #[Route('/favory', name: 'app_favory')]
     #[Route('/account/favory', name: 'app_account_favory')]
     public function favory(UserRepository $userRepository, PropertyRepository $propertyRepository, Request $request): Response
     {

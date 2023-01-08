@@ -49,7 +49,7 @@ class PropertyCrudController extends AbstractCrudController
     {
         yield TextField::new('title', label: 'Titre')
             ->setColumns(6);
-        yield TextEditorField::new('description', label: 'Description')
+        yield TextareaField::new('description', label: 'Description')
             ->setColumns(6);
         yield TextField::new('city', label: 'Ville')
             ->setColumns(6);
@@ -111,6 +111,8 @@ class PropertyCrudController extends AbstractCrudController
         // if created date is null, it's a new property else it's an update
         if ($entityInstance->getCreatedAt() === null) {
             parent::persistEntity($entityManager, $entityInstance);
+
+            $entityInstance->clearImageFile();
 
             $message = new SendPropertyEmailMessage($entityInstance);
             $this->messageBus->dispatch($message);

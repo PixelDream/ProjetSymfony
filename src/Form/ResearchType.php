@@ -20,7 +20,6 @@ class ResearchType extends AbstractType
 
         $builder
             ->add('search', null, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Ce que vous cherchez',
@@ -29,7 +28,6 @@ class ResearchType extends AbstractType
             ])
 
             ->add('city', null, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Ville',
@@ -40,7 +38,6 @@ class ResearchType extends AbstractType
             ])
 //            ->add('zipCode')
             ->add('surfaceMin', NumberType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Min',
@@ -49,7 +46,6 @@ class ResearchType extends AbstractType
                 ]
             ])
             ->add('surfaceMax', NumberType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Max',
@@ -58,7 +54,6 @@ class ResearchType extends AbstractType
                 ]
             ])
             ->add('priceMin', NumberType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Min',
@@ -67,7 +62,6 @@ class ResearchType extends AbstractType
                 ]
             ])
             ->add('priceMax', NumberType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Max',
@@ -76,7 +70,6 @@ class ResearchType extends AbstractType
                 ]
             ])
             ->add('type', ChoiceType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Type',
@@ -91,7 +84,6 @@ class ResearchType extends AbstractType
                 ],
             ])
             ->add('category', ChoiceType::class, [
-                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Catégories',

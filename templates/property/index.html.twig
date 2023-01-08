@@ -14,20 +14,20 @@
                     <div class="advance-search nice-select-white">
                         <div class="row align-items-center">
                             <div class="form-group col-xl-3 col-lg-3 col-md-6">
-                                {{ form_row(form.search) }}
+                                {{ form_widget(form.search) }}
                             </div>
 
                             <div class="form-group col-lg-2 col-md-6">
-                                {{ form_row(form.type) }}
+                                {{ form_widget(form.type) }}
                             </div>
 
                             <div class="form-group col-lg-2 col-md-6">
-                                {{ form_row(form.category) }}
+                                {{ form_widget(form.category) }}
                             </div>
 
                             <div class="form-group col-lg-2 col-md-6" data-controller="city"
                                  data-city-searchable-value="true" data-city-placeholder-value="Localisation">
-                                {{ form_row(form.city) }}
+                                {{ form_widget(form.city) }}
                             </div>
 
                             <div class="form-group col-xl-1 col-lg-2 col-md-6">
@@ -67,14 +67,23 @@
                             <div class="widget category-list">
                                 <ul class="category-list">
                                     <li>
-                                        <a class="text-decoration-none"
+                                        <a class="btn btn-secondary btn-sm"
                                            href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"><i
-                                                    class="bi bi-trash"></i> Supprimer tous les filtres
-                                            ({{ filterCount }})</a>
+                                                    class="bi bi-trash3-fill"></i> Supprimer tous les filtres ({{ filterCount }})</a>
                                     </li>
                                 </ul>
                             </div>
                         {% endif %}
+
+                        <div class="widget category-list">
+                            <ul class="category-list">
+                                <li>
+                                    <a class="btn btn-secondary"
+                                       href="{{ path('app_research_create') }}">
+                                        <i class="bi bi-bell-fill"></i> Créer une alerte</a>
+                                </li>
+                            </ul>
+                        </div>
 
                         {% if categories and app.request.query.get('category') is empty %}
                             <div class="widget category-list">
