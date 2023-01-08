@@ -1,5 +1,9 @@
 # SAFER Symfony
 
+## Vidéo
+
+[Lien de la vidéo](https://youtu.be/4dBB-NZykOk)
+
 ## Prérequis
 
 - Nodejs >= 8.19.3
