@@ -11,10 +11,12 @@
     <section class="section bg-gray">
         <!-- Container Start -->
         <div class="container">
+            <a type="button" class="btn btn-light" href="javascript:history.back()">Retour</a>
             <div class="row">
                 <!-- Left sidebar -->
                 <div class="col-lg-8">
                     <div class="product-details">
+
                         <h1 class="widget price text-left text-white">{{ property.title }}</h1>
                         <div class="product-meta">
                             <ul class="list-inline">
@@ -144,14 +146,6 @@
                             </div>
 
                         </div>
-
-                        <div data-controller="oms"  style="height:250px"></div>
-                        <div data-controller="location" data-location-searchable-value="true" data-location-placeholder-value="Localisation">
-                            <input class="w-100 my-2 form-control" type="text" name="ville" data-location-target="input">
-                        </div>
-                        <label for="location">localisation</label>
-                        <input id="value" >
-
                     </div>
                 </div>
             </div>
